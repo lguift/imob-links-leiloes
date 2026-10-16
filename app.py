@@ -8,10 +8,10 @@ def index():
 
     # Lê o Excel
     df = pd.read_excel(
-        "Lista_imoveis_geral_site.xlsm",
-        engine="openpyxl"
+    "Lista_imoveis_geral_site.xlsm",
+    engine="openpyxl",
+    nrows=40000
     )
-
     # Remove espaços dos nomes das colunas
     df.columns = [str(c).strip() for c in df.columns]
 
