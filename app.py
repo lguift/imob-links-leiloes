@@ -43,6 +43,7 @@ def index():
     # Texto
     # ======================================================
     colunas_texto = [
+        "Região",
         "UF",
         "Cidade",
         "Bairro",
