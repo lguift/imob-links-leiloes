@@ -335,8 +335,13 @@ document.addEventListener('DOMContentLoaded', async function () {
       chk.checked = filtrosSelecionados[campo].includes(valor);
 
       chk.onchange = () => {
-        const selecionados = document.querySelectorAll(`input[name="${campo}"]:checked`);
-        filtrosSelecionados[campo] = Array.from(selecionados).map(c => c.value);
+        const selecionados = new Set(filtrosSelecionados[campo] || []);
+        if (chk.checked) {
+          selecionados.add(chk.value);
+        } else {
+          selecionados.delete(chk.value);
+        }
+        filtrosSelecionados[campo] = Array.from(selecionados);
         paginaAtual = 1;
         atualizarInterface();
       };
