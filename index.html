@@ -54,6 +54,34 @@
       border-bottom: 1px solid #ccc;
     }
 
+    .filtro-titulo {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .filtro-titulo label {
+      margin-bottom: 0;
+    }
+
+    .limpar-filtro {
+      border: 0;
+      background: transparent;
+      color: #0056b3;
+      font-size: 10px;
+      padding: 2px 4px;
+      cursor: pointer;
+      text-decoration: underline;
+      white-space: nowrap;
+    }
+
+    .limpar-filtro:disabled {
+      color: #999;
+      cursor: default;
+      text-decoration: none;
+    }
+
     .filtro label {
       font-weight: bold;
       display: block;
@@ -247,9 +275,27 @@ document.addEventListener('DOMContentLoaded', async function () {
       const div = document.createElement('div');
       div.className = 'filtro';
 
+      const titulo = document.createElement('div');
+      titulo.className = 'filtro-titulo';
+
       const label = document.createElement('label');
       label.textContent = campo;
-      div.appendChild(label);
+
+      const limpar = document.createElement('button');
+      limpar.type = 'button';
+      limpar.className = 'limpar-filtro';
+      limpar.textContent = 'Limpar';
+      limpar.title = 'Limpar somente este filtro';
+      limpar.disabled = !filtrosSelecionados[campo] || filtrosSelecionados[campo].length === 0;
+      limpar.onclick = () => {
+        filtrosSelecionados[campo] = [];
+        paginaAtual = 1;
+        atualizarInterface();
+      };
+
+      titulo.appendChild(label);
+      titulo.appendChild(limpar);
+      div.appendChild(titulo);
 
       if (campo === 'Cidade' || campo === 'Bairro') {
         const busca = document.createElement('input');
