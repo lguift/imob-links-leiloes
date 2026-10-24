@@ -297,7 +297,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       titulo.appendChild(limpar);
       div.appendChild(titulo);
 
-      if (campo === 'Cidade' || campo === 'Bairro') {
+      if (campo === 'UF' || campo === 'Cidade' || campo === 'Bairro') {
         const busca = document.createElement('input');
         busca.type = 'text';
         busca.placeholder = 'Buscar...';
