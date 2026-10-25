@@ -159,6 +159,98 @@
       margin: 0 5px;
       cursor: pointer;
     }
+
+    /* Em telas pequenas, empilha filtros e resultados em vez de comprimi-los
+       lado a lado. As regras do computador acima permanecem inalteradas. */
+    @media (max-width: 700px) {
+      body {
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: block;
+        padding-bottom: 28px;
+      }
+
+      header {
+        padding: 10px 12px;
+        gap: 8px;
+        align-items: flex-start;
+        font-size: 14px;
+      }
+
+      #contador {
+        flex: 0 0 auto;
+        font-size: 12px;
+        padding: 5px 7px;
+        white-space: nowrap;
+      }
+
+      .layout {
+        display: flex;
+        flex-direction: column;
+        overflow: visible;
+      }
+
+      .sidebar {
+        width: 100%;
+        max-height: 34vh;
+        max-height: 34dvh;
+        padding: 10px 12px;
+        border-right: 0;
+        border-bottom: 1px solid #ccc;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .filtro {
+        margin-bottom: 9px;
+        padding-bottom: 7px;
+      }
+
+      .checkboxes {
+        max-height: 105px;
+      }
+
+      .conteudo {
+        min-width: 0;
+        min-height: 0;
+        padding: 8px 0;
+        overflow: visible;
+      }
+
+      .tabela-container {
+        width: 100%;
+        max-height: 52vh;
+        max-height: 52dvh;
+        min-height: 180px;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      table {
+        min-width: 610px;
+        font-size: 11px;
+      }
+
+      th, td {
+        padding: 7px 8px;
+      }
+
+      #paginador {
+        margin: 8px 4px;
+        font-size: 13px;
+      }
+
+      #paginador button {
+        padding: 7px 9px;
+        margin: 0 2px;
+      }
+
+      footer {
+        padding: 5px 8px !important;
+        font-size: 10px !important;
+      }
+    }
   </style>
 </head>
 <footer style="
