@@ -161,15 +161,17 @@
       cursor: pointer;
     }
 
-    /* Em telas pequenas, empilha filtros e resultados em vez de comprimi-los
-       lado a lado. As regras do computador acima permanecem inalteradas. */
-    @media (max-width: 700px) {
+    /* Controles extras para telefones e telas estreitas. O layout desktop permanece igual. */
+    .mobile-filters { display: contents; }
+    .mobile-filter-toggle { display: none; }
+
+    @media (max-width: 760px) {
       body {
         height: auto;
         min-height: 100vh;
         min-height: 100dvh;
         display: block;
-        padding-bottom: 28px;
+        padding-bottom: 34px;
       }
 
       header {
@@ -187,58 +189,174 @@
       }
 
       .layout {
-        display: flex;
-        flex-direction: column;
+        display: block;
         overflow: visible;
       }
 
-      .sidebar {
+      .mobile-filters {
+        display: block;
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        padding: 8px 10px;
+        background: #f4f4f4;
+      }
+
+      .mobile-filter-toggle {
+        display: flex;
         width: 100%;
-        max-height: 34vh;
-        max-height: 34dvh;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 11px 14px;
+        border: 1px solid #b9cbe0;
+        border-radius: 8px;
+        background: #fff;
+        color: #004085;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      }
+
+      .mobile-filter-toggle[aria-expanded="true"] {
+        background: #eaf2fb;
+      }
+
+      #mobile-filter-status {
+        color: #555;
+        font-size: 11px;
+        font-weight: normal;
+        text-align: right;
+      }
+
+      .sidebar {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 10px;
+        right: 10px;
+        width: auto;
+        max-height: 62vh;
+        max-height: 62dvh;
         padding: 10px 12px;
-        border-right: 0;
-        border-bottom: 1px solid #ccc;
+        border: 1px solid #c9d4e0;
+        border-radius: 0 0 10px 10px;
+        background: #fff;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
+        font-size: 12px;
       }
+
+      .sidebar.is-open { display: block; }
 
       .filtro {
         margin-bottom: 9px;
         padding-bottom: 7px;
       }
 
-      .checkboxes {
-        max-height: 105px;
-      }
+      .checkboxes { max-height: 105px; }
 
       .conteudo {
         min-width: 0;
         min-height: 0;
-        padding: 8px 0;
+        padding: 0 8px 10px;
         overflow: visible;
       }
 
       .tabela-container {
         width: 100%;
-        max-height: 52vh;
-        max-height: 52dvh;
-        min-height: 180px;
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
+        max-height: none;
+        min-height: 0;
+        overflow: visible;
+        border: 0;
+        background: transparent;
       }
 
       table {
-        min-width: 610px;
-        font-size: 11px;
+        display: block;
+        width: 100%;
+        min-width: 0;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 12px;
       }
 
-      th, td {
-        padding: 7px 8px;
+      thead { display: none; }
+
+      tbody {
+        display: grid;
+        gap: 8px;
+      }
+
+      tbody tr {
+        display: block;
+        padding: 5px 10px;
+        border: 1px solid #d5dce5;
+        border-radius: 9px;
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+      }
+
+      tbody td {
+        display: grid;
+        grid-template-columns: 94px minmax(0, 1fr);
+        gap: 8px;
+        padding: 6px 2px;
+        border-bottom: 1px solid #edf0f3;
+        overflow-wrap: anywhere;
+      }
+
+      tbody td:first-child {
+        display: block;
+        padding: 7px 2px;
+        font-size: 13px;
+        font-weight: bold;
+        line-height: 1.35;
+      }
+
+      tbody td:first-child a { color: #0056b3; }
+
+      tbody td:nth-child(2)::before {
+        content: "Avaliação";
+        color: #555;
+        font-weight: bold;
+      }
+
+      tbody td:nth-child(3)::before {
+        content: "Preço";
+        color: #555;
+        font-weight: bold;
+      }
+
+      tbody td:nth-child(4)::before {
+        content: "Desconto";
+        color: #555;
+        font-weight: bold;
+      }
+
+      tbody td:nth-child(5) {
+        border-bottom: 0;
+      }
+
+      tbody td:nth-child(5)::before {
+        content: "Link do imóvel";
+        color: #555;
+        font-weight: bold;
+      }
+
+      tbody td:nth-child(5) a {
+        display: inline-block;
+        width: fit-content;
+        padding: 4px 10px;
+        border-radius: 5px;
+        background: #eaf2fb;
+        font-weight: bold;
       }
 
       #paginador {
-        margin: 8px 4px;
+        margin: 10px 2px;
         font-size: 13px;
       }
 
@@ -279,9 +397,17 @@
 
 <div class="layout">
 
-  <aside class="sidebar">
-    <div id="filtros"></div>
-  </aside>
+  <div class="mobile-filters">
+    <button id="mobile-filter-toggle" class="mobile-filter-toggle" type="button"
+            aria-expanded="false" aria-controls="filters-panel">
+      <span id="mobile-filter-toggle-label">Filtros</span>
+      <span id="mobile-filter-status">Carregando imóveis…</span>
+    </button>
+
+    <aside class="sidebar" id="filters-panel">
+      <div id="filtros"></div>
+    </aside>
+  </div>
 
   <main class="conteudo">
 
@@ -309,7 +435,6 @@
   </main>
 
 </div>
-
 <script>
 document.addEventListener('DOMContentLoaded', async function () {
   const status = document.getElementById('status-carregamento');
@@ -489,6 +614,13 @@ document.addEventListener('DOMContentLoaded', async function () {
     document.getElementById('contador').textContent =
       total + ' imóveis';
 
+    const opcoesSelecionadas = Object.values(filtrosSelecionados)
+      .reduce((soma, valores) => soma + (valores ? valores.length : 0), 0);
+    document.getElementById('mobile-filter-status').textContent =
+      opcoesSelecionadas
+        ? opcoesSelecionadas + ' opções · ' + total.toLocaleString('pt-BR') + ' imóveis'
+        : total.toLocaleString('pt-BR') + ' imóveis';
+
     document.getElementById('pagina-info').textContent =
       'Página ' + paginaAtual + ' de ' + totalPaginas;
 
@@ -528,6 +660,17 @@ document.addEventListener('DOMContentLoaded', async function () {
     atualizarFiltros();
     atualizarTabela(filtrados);
   }
+
+
+  const mobileFilterToggle = document.getElementById('mobile-filter-toggle');
+  const filtersPanel = document.getElementById('filters-panel');
+
+  mobileFilterToggle.addEventListener('click', () => {
+    const aberto = filtersPanel.classList.toggle('is-open');
+    mobileFilterToggle.setAttribute('aria-expanded', String(aberto));
+    document.getElementById('mobile-filter-toggle-label').textContent =
+      aberto ? 'Fechar filtros' : 'Filtros';
+  });
 
 document.getElementById('anterior').onclick = () => {
     if (paginaAtual > 1) {
