@@ -291,7 +291,8 @@
       }
 
       tbody tr {
-        display: block;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         padding: 5px 10px;
         border: 1px solid #d5dce5;
         border-radius: 9px;
@@ -300,17 +301,22 @@
       }
 
       tbody td {
-        display: grid;
-        grid-template-columns: 94px minmax(0, 1fr);
-        gap: 8px;
-        padding: 6px 2px;
-        border-bottom: 1px solid #edf0f3;
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        padding: 6px 3px;
+        border-bottom: 0;
         overflow-wrap: anywhere;
+        font-size: 11px;
       }
 
       tbody td:first-child {
         display: block;
+        grid-column: 1 / -1;
         padding: 7px 2px;
+        border-bottom: 1px solid #edf0f3;
         font-size: 13px;
         font-weight: bold;
         line-height: 1.35;
@@ -318,38 +324,22 @@
 
       tbody td:first-child a { color: #0056b3; }
 
-      tbody td:nth-child(2)::before {
-        content: "Avaliação";
+      tbody td:nth-child(n+2)::before {
         color: #555;
+        font-size: 10px;
         font-weight: bold;
+        line-height: 1.2;
       }
 
-      tbody td:nth-child(3)::before {
-        content: "Preço";
-        color: #555;
-        font-weight: bold;
-      }
-
-      tbody td:nth-child(4)::before {
-        content: "Desconto";
-        color: #555;
-        font-weight: bold;
-      }
-
-      tbody td:nth-child(5) {
-        border-bottom: 0;
-      }
-
-      tbody td:nth-child(5)::before {
-        content: "Link do imóvel";
-        color: #555;
-        font-weight: bold;
-      }
+      tbody td:nth-child(2)::before { content: "Avaliação"; }
+      tbody td:nth-child(3)::before { content: "Preço"; }
+      tbody td:nth-child(4)::before { content: "Desconto"; }
+      tbody td:nth-child(5)::before { content: "Link"; }
 
       tbody td:nth-child(5) a {
         display: inline-block;
         width: fit-content;
-        padding: 4px 10px;
+        padding: 4px 9px;
         border-radius: 5px;
         background: #eaf2fb;
         font-weight: bold;
