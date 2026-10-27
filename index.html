@@ -164,6 +164,7 @@
     /* Controles extras para telefones e telas estreitas. O layout desktop permanece igual. */
     .mobile-filters { display: contents; }
     .mobile-filter-toggle { display: none; }
+    .mobile-sort { display: none; }
 
     @media (max-width: 760px) {
       body {
@@ -257,6 +258,35 @@
       }
 
       .checkboxes { max-height: 105px; }
+
+      .mobile-sort {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 10px 8px;
+        padding: 8px 10px;
+        border: 1px solid #d5dce5;
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .mobile-sort label {
+        flex: 0 0 auto;
+        color: #444;
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      .mobile-sort select {
+        flex: 1;
+        min-width: 0;
+        padding: 7px 8px;
+        border: 1px solid #c9d4e0;
+        border-radius: 6px;
+        background: #fff;
+        color: #222;
+        font-size: 12px;
+      }
 
       .conteudo {
         min-width: 0;
@@ -399,13 +429,26 @@
     </aside>
   </div>
 
+  <div class="mobile-sort">
+    <label for="mobile-sort-select">Ordenar:</label>
+    <select id="mobile-sort-select" aria-label="Ordenar imóveis">
+      <option value="padrao">Ordem original</option>
+      <option value="preco-menor">Menor preço</option>
+      <option value="preco-maior">Maior preço</option>
+      <option value="desconto-maior">Maior desconto</option>
+      <option value="avaliacao-menor">Menor avaliação</option>
+      <option value="avaliacao-maior">Maior avaliação</option>
+      <option value="endereco-az">Endereço A–Z</option>
+    </select>
+  </div>
+
   <main class="conteudo">
 
     <div class="tabela-container">
       <table id="tabela">
         <thead>
           <tr>
-            <th data-sort="Endereço Mapa" style="cursor:pointer">Endereço Mapa ↕</th>
+            <th data-sort="Endereço mapa" style="cursor:pointer">Endereço Mapa ↕</th>
             <th data-sort="Valor Avaliação Num" style="cursor:pointer">Valor de avaliação ↕</th>
             <th data-sort="Preço Num" style="cursor:pointer">Preço ↕</th>
             <th data-sort="Desconto Num" style="cursor:pointer">Desconto ↕</th>
@@ -651,6 +694,26 @@ document.addEventListener('DOMContentLoaded', async function () {
     atualizarTabela(filtrados);
   }
 
+
+  const mobileSortSelect = document.getElementById('mobile-sort-select');
+
+  mobileSortSelect.addEventListener('change', () => {
+    const ordenacoes = {
+      'padrao': { coluna: null, crescente: true },
+      'preco-menor': { coluna: 'Preço Num', crescente: true },
+      'preco-maior': { coluna: 'Preço Num', crescente: false },
+      'desconto-maior': { coluna: 'Desconto Num', crescente: false },
+      'avaliacao-menor': { coluna: 'Valor Avaliação Num', crescente: true },
+      'avaliacao-maior': { coluna: 'Valor Avaliação Num', crescente: false },
+      'endereco-az': { coluna: 'Endereço mapa', crescente: true }
+    };
+
+    const escolha = ordenacoes[mobileSortSelect.value];
+    colunaOrdenacao = escolha.coluna;
+    ordemCrescente = escolha.crescente;
+    paginaAtual = 1;
+    atualizarInterface();
+  });
 
   const mobileFilterToggle = document.getElementById('mobile-filter-toggle');
   const filtersPanel = document.getElementById('filters-panel');
