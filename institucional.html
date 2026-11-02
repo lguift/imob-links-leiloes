@@ -14,8 +14,8 @@ body{font-family:Arial,sans-serif;color:var(--ink);background:#fff;line-height:1
 a{color:inherit}
 .top{background:linear-gradient(110deg,#07152f,#123f9c);color:#fff}
 .header{max-width:1180px;margin:auto;padding:8px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.brand img{display:block;width:160px;height:54px;object-fit:contain}
-.brand span{color:var(--orange)}
+.brand a{display:flex;align-items:center;gap:10px;text-decoration:none;white-space:nowrap}.brand img{display:block;width:112px;height:66px;object-fit:contain}.brand .wordmark{font-size:22px;font-weight:900;letter-spacing:.2px;color:#fff}.brand .wordmark span{color:var(--orange)}
+
 .nav{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
 .nav a{font-size:14px;text-decoration:none;color:#fff;opacity:.94}
 .nav a:hover{color:#ffc34b}
@@ -55,13 +55,13 @@ main{max-width:1100px;margin:0 auto;padding:52px 24px 70px}
 .contact-link{display:inline-block;margin-top:12px;background:#123d91;color:white;text-decoration:none;padding:12px 18px;border-radius:6px;font-weight:bold}
 footer{background:#07152f;color:#dce5f6;padding:28px 20px;text-align:center;font-size:13px}
 footer a{color:#ffc04a;text-decoration:none;margin:0 9px}
-@media(max-width:760px){.header{align-items:flex-start;flex-direction:column;padding:7px 14px}.brand img{width:125px;height:42px}.nav{gap:12px}.nav a{font-size:12px}.hero{grid-template-columns:1fr;padding:45px 20px 48px;gap:25px}.hero-panel{padding:20px}.tabs button{padding:13px 10px;font-size:12px}main{padding:35px 18px 50px}.panel h2{font-size:26px}.cards,.steps{grid-template-columns:1fr}.lead{font-size:16px}}
+@media(max-width:760px){.header{align-items:flex-start;flex-direction:column;padding:7px 14px}.brand img{width:88px;height:52px}.brand .wordmark{font-size:17px}.nav{gap:12px}.nav a{font-size:12px}.hero{grid-template-columns:1fr;padding:45px 20px 48px;gap:25px}.hero-panel{padding:20px}.tabs button{padding:13px 10px;font-size:12px}main{padding:35px 18px 50px}.panel h2{font-size:26px}.cards,.steps{grid-template-columns:1fr}.lead{font-size:16px}}
 </style>
 </head>
 <body>
 <div class="top">
 <header class="header">
-<div class="brand"><a href="./index.html"><img src="./logo.svg" alt="Imob Links Leilões"></a></div>
+<div class="brand"><a href="./index.html"><img src="./logo.svg" alt="Símbolo Imob Links Leilões"><div class="wordmark">IMOB <span>LINKS</span> LEILÕES</div></a></div>
 <nav class="nav" aria-label="Navegação principal">
 <a href="#inicio" data-tab="inicio">Início</a><a href="#como-funciona" data-tab="como-funciona">Como funciona</a><a href="#guia-caixa" data-tab="guia-caixa">Leilões da Caixa</a><a href="#orientacoes" data-tab="orientacoes">Financiamento e riscos</a>
 </nav>
