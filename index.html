@@ -11,8 +11,8 @@
   <style>
     .site-top{background:linear-gradient(110deg,#07152f,#123f9c);color:#fff;padding:7px 16px;}
     .site-top-inner{max-width:1500px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px;}
-    .site-brand{display:flex;align-items:center;}.site-brand img{display:block;width:160px;height:52px;object-fit:contain;}
-    .site-brand span{color:#f5a400;}
+    .site-brand{display:flex;align-items:center;gap:10px;white-space:nowrap;}.site-brand img{display:block;width:112px;height:66px;object-fit:contain;}.site-brand .wordmark{font-size:22px;font-weight:900;letter-spacing:.2px;color:#fff;}.site-brand .wordmark span{color:#f5a400;}
+    
     .site-nav{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
     .site-nav a{color:#fff;text-decoration:none;font-size:13px;font-weight:600;}
     .site-nav a:hover{color:#ffc34b;text-decoration:none;}
@@ -21,7 +21,7 @@
     .site-intro h1{font-size:18px;line-height:1.2;margin-bottom:2px;}
     .site-intro p{font-size:12px;color:#e1e9fb;}
     .site-intro .cta{flex:0 0 auto;background:#f5a400;color:#101d38;padding:6px 11px;border-radius:6px;font-size:12px;font-weight:bold;text-decoration:none;}
-    @media(max-width:760px){.site-top{padding:6px 10px}.site-top-inner{align-items:flex-start;flex-direction:column;gap:5px}.site-brand img{width:125px;height:40px}.site-nav{gap:9px}.site-nav a{font-size:11px}.site-intro{padding:7px 10px}.site-intro-inner{align-items:flex-start;flex-direction:row;gap:8px}.site-intro h1{font-size:16px}.site-intro p{font-size:11px}.site-intro .cta{font-size:10px;padding:6px 8px;white-space:nowrap}.ad-rail{display:none!important}}
+    @media(max-width:760px){.site-top{padding:6px 10px}.site-top-inner{align-items:flex-start;flex-direction:column;gap:5px}.site-brand img{width:88px;height:52px}.site-brand .wordmark{font-size:17px}.site-nav{gap:9px}.site-nav a{font-size:11px}.site-intro{padding:7px 10px}.site-intro-inner{align-items:flex-start;flex-direction:row;gap:8px}.site-intro h1{font-size:16px}.site-intro p{font-size:11px}.site-intro .cta{font-size:10px;padding:6px 8px;white-space:nowrap}.ad-rail{display:none!important}}
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -134,7 +134,7 @@
       flex-direction: column;
     }
 
-    .ad-rail{flex:0 0 170px;width:170px;padding:14px 10px 10px 0;background:#f4f4f4;}\n    .ad-slot{position:sticky;top:14px;min-height:280px;border:1px dashed #c8ced8;border-radius:6px;background:#fff;color:#8791a2;text-align:center;padding:10px;font-size:11px;}\n    .ad-slot span{display:block;margin-top:8px;}\n    .tabela-container {
+    .ad-rail{flex:0 0 170px;width:170px;padding:14px 10px 10px 0;background:#f4f4f4;}\n    .ad-slot{position:sticky;top:14px;min-height:280px;border:0;border-radius:6px;background:#fff;padding:0;}\n    .tabela-container {
       flex: 1;
       overflow-y: auto;
       background-color: #fff;
@@ -425,7 +425,7 @@
 </footer>
 <body>
 
-<section class="site-top"><div class="site-top-inner"><div class="site-brand"><img src="./logo.svg" alt="Imob Links Leilões"></div><nav class="site-nav" aria-label="Navegação principal"><a href="./institucional.html#como-funciona">Como funcionam os leilões</a><a href="./institucional.html#guia-caixa">Guia Caixa</a><a href="./institucional.html#orientacoes">Financiamento e riscos</a><a href="./institucional.html#sobre">Sobre o site</a><a href="./institucional.html#contato">Contato</a><a href="./institucional.html#privacidade">Privacidade</a></nav></div></section>
+<section class="site-top"><div class="site-top-inner"><div class="site-brand"><img src="./logo.svg" alt="Símbolo Imob Links Leilões"><div class="wordmark">IMOB <span>LINKS</span> LEILÕES</div></div><nav class="site-nav" aria-label="Navegação principal"><a href="./institucional.html#como-funciona">Como funcionam os leilões</a><a href="./institucional.html#guia-caixa">Guia Caixa</a><a href="./institucional.html#orientacoes">Financiamento e riscos</a><a href="./institucional.html#sobre">Sobre o site</a><a href="./institucional.html#contato">Contato</a><a href="./institucional.html#privacidade">Privacidade</a></nav></div></section>
 <section class="site-intro"><div class="site-intro-inner"><div><h1>Encontre oportunidades em imóveis de leilão</h1><p>Consulte a lista, filtre por localização e preço e confira as informações no anúncio oficial.</p></div><a class="cta" href="#tabela">VER IMÓVEIS ↓</a></div></section>
 
 <header>
@@ -485,7 +485,7 @@
     </div>
 
   </main>
-  <aside class="ad-rail" aria-label="Espaço para publicidade"><div class="ad-slot">Publicidade<span>Espaço reservado para anúncios</span></div></aside>
+  <aside class="ad-rail" aria-label="Espaço para publicidade"><div class="ad-slot" aria-label="Espaço reservado para anúncios"></div></aside>
 
 </div>
 <script>
