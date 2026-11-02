@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8370749860360749"
+     crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Imóveis - Imob Links Leilões</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #004085;
+      color: white;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    #contador {
+      font-size: 16px;
+      background-color: #003366;
+      padding: 6px 12px;
+      border-radius: 4px;
+    }
+
+    .layout {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 300px;
+      background-color: #ffffff;
+      padding: 15px;
+      border-right: 1px solid #ccc;
+      overflow-y: auto;
+      font-size: 12px;
+    }
+
+    .filtro {
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .filtro-titulo {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .filtro-titulo label {
+      margin-bottom: 0;
+    }
+
+    .limpar-filtro {
+      border: 0;
+      background: transparent;
+      color: #0056b3;
+      font-size: 10px;
+      padding: 2px 4px;
+      cursor: pointer;
+      text-decoration: underline;
+      white-space: nowrap;
+    }
+
+    .limpar-filtro:disabled {
+      color: #999;
+      cursor: default;
+      text-decoration: none;
+    }
+
+    .filtro label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .busca {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 5px;
+      font-size: 11px;
+    }
+
+    .checkboxes {
+      max-height: 130px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      padding: 5px;
+      background-color: #f9f9f9;
+    }
+
+    .checkboxes label {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 11px;
+    }
+
+    .conteudo {
+      flex: 1;
+      padding: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tabela-container {
+      flex: 1;
+      overflow-y: auto;
+      background-color: #fff;
+      border: 1px solid #ccc;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+
+    thead {
+      background-color: #e9ecef;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    th, td {
+      padding: 6px 10px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    a { color: #007bff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    #status-carregamento { padding: 6px 15px; color: #555; font-size: 12px; }
+
+    #paginador {
+      text-align: center;
+      margin: 8px 0;
+    }
+
+    #paginador button {
+      padding: 6px 10px;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+
+    /* Controles extras para telefones e telas estreitas. O layout desktop permanece igual. */
+    .mobile-filters { display: contents; }
+    .mobile-filter-toggle { display: none; }
+    .mobile-sort { display: none; }
+
+    @media (max-width: 760px) {
+      body {
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: block;
+        padding-bottom: 34px;
+      }
+
+      header {
+        padding: 10px 12px;
+        gap: 8px;
+        align-items: flex-start;
+        font-size: 14px;
+      }
+
+      #contador {
+        flex: 0 0 auto;
+        font-size: 12px;
+        padding: 5px 7px;
+        white-space: nowrap;
+      }
+
+      .layout {
+        display: block;
+        overflow: visible;
+      }
+
+      .mobile-filters {
+        display: block;
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        padding: 8px 10px;
+        background: #f4f4f4;
+      }
+
+      .mobile-filter-toggle {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 11px 14px;
+        border: 1px solid #b9cbe0;
+        border-radius: 8px;
+        background: #fff;
+        color: #004085;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      }
+
+      .mobile-filter-toggle[aria-expanded="true"] {
+        background: #eaf2fb;
+      }
+
+      #mobile-filter-status {
+        color: #555;
+        font-size: 11px;
+        font-weight: normal;
+        text-align: right;
+      }
+
+      .sidebar {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 10px;
+        right: 10px;
+        width: auto;
+        max-height: 62vh;
+        max-height: 62dvh;
+        padding: 10px 12px;
+        border: 1px solid #c9d4e0;
+        border-radius: 0 0 10px 10px;
+        background: #fff;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        font-size: 12px;
+      }
+
+      .sidebar.is-open { display: block; }
+
+      .filtro {
+        margin-bottom: 9px;
+        padding-bottom: 7px;
+      }
+
+      .checkboxes { max-height: 105px; }
+
+      .mobile-sort {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 10px 8px;
+        padding: 8px 10px;
+        border: 1px solid #d5dce5;
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .mobile-sort label {
+        flex: 0 0 auto;
+        color: #444;
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      .mobile-sort select {
+        flex: 1;
+        min-width: 0;
+        padding: 7px 8px;
+        border: 1px solid #c9d4e0;
+        border-radius: 6px;
+        background: #fff;
+        color: #222;
+        font-size: 12px;
+      }
+
+      .conteudo {
+        min-width: 0;
+        min-height: 0;
+        padding: 0 8px 10px;
+        overflow: visible;
+      }
+
+      .tabela-container {
+        width: 100%;
+        max-height: none;
+        min-height: 0;
+        overflow: visible;
+        border: 0;
+        background: transparent;
+      }
+
+      table {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 12px;
+      }
+
+      thead { display: none; }
+
+      tbody {
+        display: grid;
+        gap: 2px;
+      }
+
+      tbody tr {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        padding: 2px 6px;
+        border: 1px solid #d5dce5;
+        border-radius: 9px;
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+      }
+
+      tbody td {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1px;
+        padding: 2px 2px;
+        border-bottom: 0;
+        overflow-wrap: anywhere;
+        font-size: 11px;
+      }
+
+      tbody td:first-child {
+        display: block;
+        grid-column: 1 / -1;
+        padding: 3px 2px;
+        border-bottom: 1px solid #edf0f3;
+        font-size: 13px;
+        font-weight: bold;
+        line-height: 1.2;
+      }
+
+      tbody td:first-child a { color: #0056b3; }
+
+      tbody td:nth-child(n+2)::before {
+        color: #555;
+        font-size: 10px;
+        font-weight: bold;
+        line-height: 1.2;
+      }
+
+      tbody td:nth-child(2)::before { content: "Avaliação"; }
+      tbody td:nth-child(3)::before { content: "Preço"; }
+      tbody td:nth-child(4)::before { content: "Desconto"; }
+      tbody td:nth-child(5)::before { content: "Link"; }
+
+      tbody td:nth-child(5) a {
+        display: inline-block;
+        width: fit-content;
+        padding: 2px 6px;
+        border-radius: 5px;
+        background: #eaf2fb;
+        font-weight: bold;
+      }
+
+      #paginador {
+        margin: 10px 2px;
+        font-size: 13px;
+      }
+
+      #paginador button {
+        padding: 7px 9px;
+        margin: 0 2px;
+      }
+
+      footer {
+        padding: 5px 8px !important;
+        font-size: 10px !important;
+      }
+    }
+  </style>
+</head>
+<footer style="
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #f4f4f4;
+    border-top: 1px solid #ccc;
+    padding: 2px 15px;
+    font-size: 11px;
+    color: #555;
+    text-align: center;
+    z-index: 9999;
+">
+    Aviso: As informações são disponibilizadas publicamente pelo site da Caixa Econômica Federal. Este site não se responsabiliza por nenhuma informação.
+</footer>
+<body>
+
+<header>
+  <div>IMOB LINKS LEILÕES - Dashboard Imóveis Caixa BR - Ache seu imóvel aqui<br>Atualização diária, confira! 01/11/2026</div>
+  <div id="contador">0 imóveis</div>
+</header>
+<div id="status-carregamento" role="status" aria-live="polite">Carregando imóveis…</div>
+
+<div class="layout">
+
+  <div class="mobile-filters">
+    <button id="mobile-filter-toggle" class="mobile-filter-toggle" type="button"
+            aria-expanded="false" aria-controls="filters-panel">
+      <span id="mobile-filter-toggle-label">Filtros</span>
+      <span id="mobile-filter-status">Carregando imóveis…</span>
+    </button>
+
+    <aside class="sidebar" id="filters-panel">
+      <div id="filtros"></div>
+    </aside>
+  </div>
+
+  <div class="mobile-sort">
+    <label for="mobile-sort-select">Ordenar:</label>
+    <select id="mobile-sort-select" aria-label="Ordenar imóveis">
+      <option value="padrao">Ordem original</option>
+      <option value="preco-menor">Menor preço</option>
+      <option value="preco-maior">Maior preço</option>
+      <option value="desconto-maior">Maior desconto</option>
+      <option value="avaliacao-menor">Menor avaliação</option>
+      <option value="avaliacao-maior">Maior avaliação</option>
+      <option value="endereco-az">Endereço A–Z</option>
+    </select>
+  </div>
+
+  <main class="conteudo">
+
+    <div class="tabela-container">
+      <table id="tabela">
+        <thead>
+          <tr>
+            <th data-sort="Endereço mapa" style="cursor:pointer">Endereço Mapa ↕</th>
+            <th data-sort="Valor Avaliação Num" style="cursor:pointer">Valor de avaliação ↕</th>
+            <th data-sort="Preço Num" style="cursor:pointer">Preço ↕</th>
+            <th data-sort="Desconto Num" style="cursor:pointer">Desconto ↕</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div id="paginador">
+      <button id="anterior">Anterior</button>
+      <span id="pagina-info"></span>
+      <button id="proximo">Próximo</button>
+    </div>
+
+  </main>
+
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', async function () {
+  const status = document.getElementById('status-carregamento');
+  try {
+    const resposta = await fetch('./imoveis.json', { cache: 'no-store' });
+    if (!resposta.ok) throw new Error('HTTP ' + resposta.status);
+    const imoveisOriginais = await resposta.json();
+    status.style.display = 'none';
+  let filtrosSelecionados = {};
+  let paginaAtual = 1;
+  const itensPorPagina = 18;
+  let colunaOrdenacao = null;
+  let ordemCrescente = true;
+
+  const ordemFiltros = [
+    'Região','UF','Cidade','Bairro','Tipo Imóvel',
+	'Quartos','Vagas de garagem','Financiamento','Faixa Preço',
+	'Faixa Desconto','Modalidade de venda'
+  ];
+
+  function pegar(obj, ...nomes) {
+    for (const n of nomes) if (obj[n]) return obj[n];
+    return '';
+  }
+
+  function aplicarFiltros(imovel) {
+    for (const campo in filtrosSelecionados) {
+      if (
+        filtrosSelecionados[campo].length > 0 &&
+        !filtrosSelecionados[campo].includes(String(imovel[campo]))
+      ) return false;
+    }
+    return true;
+  }
+
+  function atualizarFiltros() {
+    const container = document.getElementById('filtros');
+    container.innerHTML = '';
+
+    ordemFiltros.forEach(campo => {
+      // Recalcula as opcoes com os outros filtros e ignora o campo atual.
+      // Isso permite acrescentar varios estados ou cidades.
+      const listaParaOpcoes = imoveisOriginais.filter(imovel => {
+        return Object.entries(filtrosSelecionados).every(([filtro, selecionados]) => {
+          if (filtro === campo || !selecionados || selecionados.length === 0) return true;
+          return selecionados.includes(String(imovel[filtro] ?? ''));
+        });
+      });
+
+      const valoresSet = new Set(
+        listaParaOpcoes.map(i => String(i[campo] ?? '')).filter(v => v)
+      );
+      (filtrosSelecionados[campo] || []).forEach(valor => valoresSet.add(valor));
+      const valores = [...valoresSet].sort();
+
+      const div = document.createElement('div');
+      div.className = 'filtro';
+
+      const titulo = document.createElement('div');
+      titulo.className = 'filtro-titulo';
+
+      const label = document.createElement('label');
+      label.textContent = campo;
+
+      const limpar = document.createElement('button');
+      limpar.type = 'button';
+      limpar.className = 'limpar-filtro';
+      limpar.textContent = 'Limpar';
+      limpar.title = 'Limpar somente este filtro';
+      limpar.disabled = !filtrosSelecionados[campo] || filtrosSelecionados[campo].length === 0;
+      limpar.onclick = () => {
+        filtrosSelecionados[campo] = [];
+        paginaAtual = 1;
+        atualizarInterface();
+      };
+
+      titulo.appendChild(label);
+      titulo.appendChild(limpar);
+      div.appendChild(titulo);
+
+      if (campo === 'UF' || campo === 'Cidade' || campo === 'Bairro') {
+        const busca = document.createElement('input');
+        busca.type = 'text';
+        busca.placeholder = 'Buscar...';
+        busca.className = 'busca';
+        busca.oninput = () => {
+          atualizarCheckboxes(
+            campo,
+            valores.filter(v => v.includes(busca.value.toUpperCase())),
+            box
+          );
+        };
+        div.appendChild(busca);
+      }
+
+      const box = document.createElement('div');
+      box.className = 'checkboxes';
+
+      atualizarCheckboxes(campo, valores, box);
+
+      div.appendChild(box);
+      container.appendChild(div);
+    });
+  }
+
+  function atualizarCheckboxes(campo, valores, box) {
+    box.innerHTML = '';
+
+    valores.forEach(valor => {
+      const chk = document.createElement('input');
+      chk.type = 'checkbox';
+      chk.value = valor;
+      chk.name = campo;
+
+      if (!filtrosSelecionados[campo]) filtrosSelecionados[campo] = [];
+      chk.checked = filtrosSelecionados[campo].includes(valor);
+
+      chk.onchange = () => {
+        const selecionados = new Set(filtrosSelecionados[campo] || []);
+        if (chk.checked) {
+          selecionados.add(chk.value);
+        } else {
+          selecionados.delete(chk.value);
+        }
+        filtrosSelecionados[campo] = Array.from(selecionados);
+        paginaAtual = 1;
+        atualizarInterface();
+      };
+
+      const lbl = document.createElement('label');
+      lbl.appendChild(chk);
+      lbl.appendChild(document.createTextNode(' ' + valor));
+      box.appendChild(lbl);
+    });
+  }
+
+  function atualizarTabela(lista) {
+    const corpo = document.querySelector('#tabela tbody');
+    corpo.innerHTML = '';
+
+    const total = lista.length;
+    const inicio = (paginaAtual - 1) * itensPorPagina;
+    const pagina = lista.slice(inicio, inicio + itensPorPagina);
+
+    pagina.forEach(imovel => {
+      const tr = document.createElement('tr');
+
+      const endereco = imovel["Endereço mapa"];
+
+      const tdEnd = document.createElement('td');
+      const aMapa = document.createElement('a');
+      aMapa.href = 'https://maps.google.com/maps?q=' + encodeURIComponent(endereco);
+      aMapa.textContent = endereco;
+      aMapa.target = '_blank';
+      tdEnd.appendChild(aMapa);
+      tr.appendChild(tdEnd);
+
+      ['Valor de avaliação','Preço','Desconto ok'].forEach(c => {
+        const td = document.createElement('td');
+        td.textContent = imovel[c] || '';
+        tr.appendChild(td);
+      });
+
+      const tdLink = document.createElement('td');
+      const a = document.createElement('a');
+      a.href = imovel['Link'] || '#';
+      a.textContent = 'Ver';
+      a.target = '_blank';
+      tdLink.appendChild(a);
+      tr.appendChild(tdLink);
+
+      corpo.appendChild(tr);
+    });
+
+    const totalPaginas = Math.ceil(total / itensPorPagina);
+
+    document.getElementById('contador').textContent =
+      total + ' imóveis';
+
+    const opcoesSelecionadas = Object.values(filtrosSelecionados)
+      .reduce((soma, valores) => soma + (valores ? valores.length : 0), 0);
+    document.getElementById('mobile-filter-status').textContent =
+      opcoesSelecionadas
+        ? opcoesSelecionadas + ' opções · ' + total.toLocaleString('pt-BR') + ' imóveis'
+        : total.toLocaleString('pt-BR') + ' imóveis';
+
+    document.getElementById('pagina-info').textContent =
+      'Página ' + paginaAtual + ' de ' + totalPaginas;
+
+    document.getElementById('anterior').disabled = paginaAtual === 1;
+    document.getElementById('proximo').disabled = paginaAtual === totalPaginas;
+  }
+
+  function atualizarInterface() {
+    let filtrados = imoveisOriginais.filter(aplicarFiltros);
+
+    if (colunaOrdenacao) {
+      filtrados.sort((a,b)=>{
+        let va=a[colunaOrdenacao];
+        let vb=b[colunaOrdenacao];
+
+        if(["Valor Avaliação Num","Preço Num","Desconto Num"].includes(colunaOrdenacao)){
+          va=Number(va)||0;
+          vb=Number(vb)||0;
+        }else{
+          va=String(va||"").toUpperCase();
+          vb=String(vb||"").toUpperCase();
+        }
+
+		if (ordemCrescente) {
+			if (va < vb) return -1;
+			if (va > vb) return 1;
+		} else {
+			if (va < vb) return 1;
+			if (va > vb) return -1;
+		}
+
+		return 0;
+        return 0;
+      });
+    }
+
+    atualizarFiltros();
+    atualizarTabela(filtrados);
+  }
+
+
+  const mobileSortSelect = document.getElementById('mobile-sort-select');
+
+  mobileSortSelect.addEventListener('change', () => {
+    const ordenacoes = {
+      'padrao': { coluna: null, crescente: true },
+      'preco-menor': { coluna: 'Preço Num', crescente: true },
+      'preco-maior': { coluna: 'Preço Num', crescente: false },
+      'desconto-maior': { coluna: 'Desconto Num', crescente: false },
+      'avaliacao-menor': { coluna: 'Valor Avaliação Num', crescente: true },
+      'avaliacao-maior': { coluna: 'Valor Avaliação Num', crescente: false },
+      'endereco-az': { coluna: 'Endereço mapa', crescente: true }
+    };
+
+    const escolha = ordenacoes[mobileSortSelect.value];
+    colunaOrdenacao = escolha.coluna;
+    ordemCrescente = escolha.crescente;
+    paginaAtual = 1;
+    atualizarInterface();
+  });
+
+  const mobileFilterToggle = document.getElementById('mobile-filter-toggle');
+  const filtersPanel = document.getElementById('filters-panel');
+
+  mobileFilterToggle.addEventListener('click', () => {
+    const aberto = filtersPanel.classList.toggle('is-open');
+    mobileFilterToggle.setAttribute('aria-expanded', String(aberto));
+    document.getElementById('mobile-filter-toggle-label').textContent =
+      aberto ? 'Fechar filtros' : 'Filtros';
+  });
+
+document.getElementById('anterior').onclick = () => {
+    if (paginaAtual > 1) {
+        paginaAtual--;
+        atualizarInterface();
+    }
+};
+
+document.getElementById('proximo').onclick = () => {
+    const filtrados = imoveisOriginais.filter(aplicarFiltros);
+
+    if (paginaAtual * itensPorPagina < filtrados.length) {
+        paginaAtual++;
+        atualizarInterface();
+    }
+};
+
+document.querySelectorAll("#tabela thead th[data-sort]").forEach(th => {
+
+    th.addEventListener("click", () => {
+
+        const c = th.dataset.sort;
+
+        if (colunaOrdenacao === c) {
+            ordemCrescente = !ordemCrescente;
+        } else {
+            colunaOrdenacao = c;
+            ordemCrescente = false; // primeiro clique = decrescente
+        }
+
+        paginaAtual = 1;
+        atualizarInterface();
+
+    });
+
+});
+
+atualizarInterface();
+  } catch (erro) {
+    status.textContent = 'Não foi possível carregar os imóveis. Tente atualizar a página.';
+    console.error('Falha ao carregar imoveis.json:', erro);
+  }
+});
+</script>
+
+</body>
+</html>
