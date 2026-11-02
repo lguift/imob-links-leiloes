@@ -13,13 +13,13 @@ html{scroll-behavior:smooth}
 body{font-family:Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.6}
 a{color:inherit}
 .top{background:linear-gradient(110deg,#07152f,#123f9c);color:#fff}
-.header{max-width:1180px;margin:auto;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.brand{font-size:25px;font-weight:800;letter-spacing:.3px;line-height:1.1}
+.header{max-width:1180px;margin:auto;padding:8px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand img{display:block;width:160px;height:54px;object-fit:contain}
 .brand span{color:var(--orange)}
 .nav{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
 .nav a{font-size:14px;text-decoration:none;color:#fff;opacity:.94}
 .nav a:hover{color:#ffc34b}
-.hero{max-width:1180px;margin:auto;padding:68px 24px 78px;display:grid;grid-template-columns:1.35fr .8fr;gap:45px;align-items:center;min-height:390px}
+.hero{max-width:1180px;margin:auto;padding:34px 24px 38px;display:grid;grid-template-columns:1.35fr .8fr;gap:45px;align-items:center;min-height:250px}
 .eyebrow{color:#ffc34b;font-size:13px;font-weight:bold;text-transform:uppercase;letter-spacing:1.4px;margin-bottom:14px}
 .hero h1{font-size:clamp(34px,5vw,55px);line-height:1.12;max-width:720px;margin-bottom:20px}
 .hero h1 span{color:var(--orange)}
@@ -33,7 +33,7 @@ a{color:inherit}
 .hero-panel li:before{content:"✓";color:var(--orange);font-weight:bold;margin-right:10px}
 .tabs-wrap{background:#101b2e;position:sticky;top:0;z-index:10;box-shadow:0 3px 10px #0002}
 .tabs{max-width:1180px;margin:auto;padding:0 20px;display:flex;gap:4px;overflow-x:auto}
-.tabs button{flex:0 0 auto;border:0;background:transparent;color:#fff;padding:16px 13px;font-size:14px;cursor:pointer;border-bottom:3px solid transparent}
+.tabs button{flex:0 0 auto;border:0;background:transparent;color:#fff;padding:10px 11px;font-size:14px;cursor:pointer;border-bottom:3px solid transparent}
 .tabs button:hover,.tabs button.active{color:#ffc04a;border-bottom-color:var(--orange)}
 main{max-width:1100px;margin:0 auto;padding:52px 24px 70px}
 .panel{display:none;animation:fade .2s ease}
@@ -55,13 +55,13 @@ main{max-width:1100px;margin:0 auto;padding:52px 24px 70px}
 .contact-link{display:inline-block;margin-top:12px;background:#123d91;color:white;text-decoration:none;padding:12px 18px;border-radius:6px;font-weight:bold}
 footer{background:#07152f;color:#dce5f6;padding:28px 20px;text-align:center;font-size:13px}
 footer a{color:#ffc04a;text-decoration:none;margin:0 9px}
-@media(max-width:760px){.header{align-items:flex-start;flex-direction:column;padding:17px}.nav{gap:12px}.nav a{font-size:12px}.hero{grid-template-columns:1fr;padding:45px 20px 48px;gap:25px}.hero-panel{padding:20px}.tabs button{padding:13px 10px;font-size:12px}main{padding:35px 18px 50px}.panel h2{font-size:26px}.cards,.steps{grid-template-columns:1fr}.lead{font-size:16px}}
+@media(max-width:760px){.header{align-items:flex-start;flex-direction:column;padding:7px 14px}.brand img{width:125px;height:42px}.nav{gap:12px}.nav a{font-size:12px}.hero{grid-template-columns:1fr;padding:45px 20px 48px;gap:25px}.hero-panel{padding:20px}.tabs button{padding:13px 10px;font-size:12px}main{padding:35px 18px 50px}.panel h2{font-size:26px}.cards,.steps{grid-template-columns:1fr}.lead{font-size:16px}}
 </style>
 </head>
 <body>
 <div class="top">
 <header class="header">
-<div class="brand">IMOB <span>LINKS</span> LEILÕES</div>
+<div class="brand"><a href="./index.html"><img src="./logo.svg" alt="Imob Links Leilões"></a></div>
 <nav class="nav" aria-label="Navegação principal">
 <a href="#inicio" data-tab="inicio">Início</a><a href="#como-funciona" data-tab="como-funciona">Como funciona</a><a href="#guia-caixa" data-tab="guia-caixa">Leilões da Caixa</a><a href="#orientacoes" data-tab="orientacoes">Financiamento e riscos</a>
 </nav>
