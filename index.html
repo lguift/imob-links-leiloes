@@ -138,25 +138,41 @@
       flex: 1 1 0;
       min-width: 0;
       min-height: 0;
-      height: 100%;
+      height: auto;
       padding: 10px;
       overflow: hidden;
       display: grid;
       grid-template-rows: minmax(0, 1fr) auto;
       align-content: stretch;
+      gap: 0;
     }
 
     .ad-rail{flex:0 0 170px;width:170px;padding:14px 10px 10px 0;background:#f4f4f4;}\n    .ad-slot{position:sticky;top:14px;min-height:280px;border:0;border-radius:6px;background:#fff;padding:0;}\n    .tabela-container {
       min-width: 0;
       min-height: 0;
-      height: 100%;
-      max-height: 100%;
+      height: auto;
+      max-height: none;
       overflow-x: auto;
-      overflow-y: scroll;
+      overflow-y: auto;
       overscroll-behavior: contain;
       scrollbar-gutter: stable;
       background-color: #fff;
       border: 1px solid #ccc;
+    }
+
+    .tabela-container::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
+    }
+
+    .tabela-container::-webkit-scrollbar-track {
+      background: #e5e5e5;
+    }
+
+    .tabela-container::-webkit-scrollbar-thumb {
+      background: #999;
+      border-radius: 6px;
+      border: 2px solid #e5e5e5;
     }
 
     table {
@@ -191,8 +207,8 @@
       margin: 8px 0 0;
       padding: 2px 0 4px;
       background: #f4f4f4;
-      position: relative;
-      z-index: 2;
+      position: static;
+      z-index: auto;
     }
 
     #paginador button {
