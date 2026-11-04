@@ -366,13 +366,44 @@
         overflow: visible;
       }
 
+      .conteudo {
+        display: block;
+        height: auto;
+        overflow: visible;
+      }
+
       .tabela-container {
+        display: block;
         width: 100%;
+        height: auto;
         max-height: none;
         min-height: 0;
         overflow: visible;
         border: 0;
         background: transparent;
+      }
+
+      #paginador {
+        position: static !important;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        clear: both;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        margin: 10px 0 12px !important;
+        padding: 10px 4px !important;
+        box-sizing: border-box;
+        background: #f4f4f4;
+        z-index: auto !important;
+      }
+
+      #paginador button,
+      #pagina-info {
+        position: static !important;
+        float: none !important;
       }
 
       table {
