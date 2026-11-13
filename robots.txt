@@ -1,4 +1,2 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://imob-links-leiloes.pages.dev/sitemap.xml
