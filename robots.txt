@@ -1,8 +1,4 @@
 User-agent: *
 Allow: /
 
-User-agent: Mediapartners-Google
-Allow: /
-
-User-agent: Googlebot
-Allow: /ads.txt
+Sitemap: https://imob-links-leiloes.pages.dev/sitemap.xml
