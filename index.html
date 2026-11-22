@@ -9,19 +9,21 @@
   <meta name="description" content="Consulte imóveis de leilão da Caixa, filtre por região, cidade, preço e desconto. Confira guias e orientações para comprar com segurança.">
 
   <style>
-    .site-top{background:linear-gradient(110deg,#07152f,#123f9c);color:#fff;padding:7px 16px;}
+    .site-top{background:linear-gradient(110deg,#07152f,#123f9c);color:#fff;padding:2px 16px;}
     .site-top-inner{max-width:1500px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px;}
-    .site-brand{display:flex;align-items:center;gap:10px;white-space:nowrap;}.site-brand img{display:block;width:112px;height:66px;object-fit:contain;}.site-brand .wordmark{font-size:22px;font-weight:900;letter-spacing:.2px;color:#fff;}.site-brand .wordmark span{color:#f5a400;}
+    .site-brand{display:flex;align-items:center;gap:10px;white-space:nowrap;}.site-brand img{display:block;width:112px;height:58px;object-fit:contain;}.site-brand .wordmark{font-size:22px;font-weight:900;letter-spacing:.2px;color:#fff;}.site-brand .wordmark span{color:#f5a400;}
     
     .site-nav{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
     .site-nav a{color:#fff;text-decoration:none;font-size:13px;font-weight:600;}
     .site-nav a:hover{color:#ffc34b;text-decoration:none;}
-    .site-intro{background:#102b61;color:#fff;padding:8px 16px;}
-    .site-intro-inner{max-width:1500px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px;}
-    .site-intro h1{font-size:18px;line-height:1.2;margin-bottom:2px;}
-    .site-intro p{font-size:12px;color:#e1e9fb;}
-    .site-intro .cta{flex:0 0 auto;background:#f5a400;color:#101d38;padding:6px 11px;border-radius:6px;font-size:12px;font-weight:bold;text-decoration:none;}
-    @media(max-width:760px){.site-top{padding:6px 10px}.site-top-inner{align-items:flex-start;flex-direction:column;gap:5px}.site-brand img{width:88px;height:52px}.site-brand .wordmark{font-size:17px}.site-nav{gap:9px}.site-nav a{font-size:11px}.site-intro{padding:7px 10px}.site-intro-inner{align-items:flex-start;flex-direction:row;gap:8px}.site-intro h1{font-size:16px}.site-intro p{font-size:11px}.site-intro .cta{font-size:10px;padding:6px 8px;white-space:nowrap}.ad-rail{display:none!important}}
+    .site-nav .cta{flex:0 0 auto;background:#f5a400;color:#101d38;padding:6px 11px;border-radius:6px;font-size:12px;font-weight:bold;text-decoration:none;}
+    .site-nav .cta:hover{color:#101d38;background:#ffc34b;}
+    .header-copy{display:flex;min-width:0;flex-direction:column;gap:1px;}
+    .header-title{font-size:inherit;line-height:1.1;}
+    .header-headline{font-size:18px;line-height:1.2;margin:0;}
+    .header-description{font-size:12px;line-height:1.1;font-weight:normal;color:#e1e9fb;}
+    .header-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+    @media(max-width:760px){.site-top{padding:4px 10px}.site-top-inner{align-items:flex-start;flex-direction:column;gap:5px}.site-brand img{width:88px;height:46px}.site-brand .wordmark{font-size:17px}.site-nav{gap:9px}.site-nav a{font-size:11px}.site-nav .cta{font-size:10px;padding:6px 8px;white-space:nowrap}.header-headline{font-size:16px}.header-description{font-size:11px}.header-meta{align-self:flex-start;flex-direction:column;align-items:flex-end;gap:4px;margin-left:auto}.ad-rail{display:none!important}}
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -38,10 +40,11 @@
     header {
       background-color: #004085;
       color: white;
-      padding: 8px 20px;
+      padding: 6px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 16px;
       font-size: 17px;
       font-weight: bold;
     }
@@ -156,7 +159,7 @@
       min-width: 0;
       min-height: 0;
       height: 100%;
-      padding: 10px;
+      padding: 10px 10px 0;
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -248,7 +251,7 @@
       min-height: 30px;
       text-align: center;
       margin: 4px 0 0;
-      padding: 0 0 2px;
+      padding: 0;
       background: #f4f4f4;
     }
 
@@ -270,7 +273,7 @@
         min-height: 100dvh;
         display: block;
         overflow: visible;
-        padding-bottom: 34px;
+        padding-bottom: 24px;
       }
 
       header {
@@ -389,7 +392,7 @@
       .conteudo {
         min-width: 0;
         min-height: 0;
-        padding: 0 8px 10px;
+        padding: 0 8px 0;
         overflow: visible;
       }
 
@@ -420,8 +423,8 @@
         width: 100%;
         height: auto;
         min-height: 0;
-        margin: 10px 0 12px !important;
-        padding: 10px 4px !important;
+        margin: 10px 0 0 !important;
+        padding: 10px 4px 0 !important;
         box-sizing: border-box;
         background: #f4f4f4;
         z-index: auto !important;
@@ -542,12 +545,15 @@
 </footer>
 <body>
 
-<section class="site-top"><div class="site-top-inner"><div class="site-brand"><img src="./logo.svg" alt="Símbolo Imob Links Leilões"><div class="wordmark">IMOB <span>LINKS</span> LEILÕES</div></div><nav class="site-nav" aria-label="Navegação principal"><a href="./institucional.html#como-funciona">Como funcionam os leilões</a><a href="./institucional.html#guia-caixa">Guia Caixa</a><a href="./institucional.html#orientacoes">Financiamento e riscos</a><a href="./institucional.html#sobre">Sobre o site</a><a href="./institucional.html#contato">Contato</a><a href="./institucional.html#privacidade">Privacidade</a></nav></div></section>
-<section class="site-intro"><div class="site-intro-inner"><div><h1>Encontre oportunidades em imóveis de leilão</h1><p>Consulte a lista, filtre por localização e preço e confira as informações no anúncio oficial.</p></div><a class="cta" href="#tabela">VER IMÓVEIS ↓</a></div></section>
+<section class="site-top"><div class="site-top-inner"><div class="site-brand"><img src="./logo.svg" alt="Símbolo Imob Links Leilões"><div class="wordmark">IMOB <span>LINKS</span> LEILÕES</div></div><nav class="site-nav" aria-label="Navegação principal"><a class="cta" href="#tabela">VER IMÓVEIS ↓</a><a href="./institucional.html#como-funciona">Como funcionam os leilões</a><a href="./institucional.html#guia-caixa">Guia Caixa</a><a href="./institucional.html#orientacoes">Financiamento e riscos</a><a href="./institucional.html#sobre">Sobre o site</a><a href="./institucional.html#contato">Contato</a><a href="./institucional.html#privacidade">Privacidade</a></nav></div></section>
 
 <header>
-  <div>LISTA DE IMÓVEIS CAIXA</div>
-  <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><span style="font-size:12px;font-weight:500;opacity:.9">Atualizado em 22/11/2026</span><div id="contador">0 imóveis</div></div>
+  <div class="header-copy">
+    <div class="header-title">LISTA DE IMÓVEIS CAIXA</div>
+    <h1 class="header-headline">Encontre oportunidades em imóveis de leilão</h1>
+    <p class="header-description">Consulte a lista, filtre por localização e preço e confira as informações no anúncio oficial.</p>
+  </div>
+  <div class="header-meta"><span style="font-size:12px;font-weight:500;opacity:.9">Atualizado em 22/11/2026</span><div id="contador">0 imóveis</div></div>
 </header>
 <div id="status-carregamento" role="status" aria-live="polite">Carregando imóveis…</div>
 
