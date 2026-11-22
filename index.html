@@ -214,11 +214,11 @@
       font-size: 13px;
     }
 
-    #tabela col.col-endereco { width: 57%; }
+    #tabela col.col-endereco { width: 55%; }
     #tabela col.col-avaliacao { width: 18%; }
     #tabela col.col-preco { width: 9%; }
-    #tabela col.col-desconto { width: 9%; }
-    #tabela col.col-link { width: 7%; }
+    #tabela col.col-desconto { width: 10%; }
+    #tabela col.col-link { width: 8%; }
 
     thead {
       background-color: #e9ecef;
@@ -234,7 +234,8 @@
       vertical-align: middle;
     }
 
-    #tabela th { white-space: nowrap; }
+    #tabela th[data-sort] { white-space: nowrap; }
+    #tabela th:not([data-sort]) { white-space: normal; }
 
     a { color: #007bff; text-decoration: none; }
     a:hover { text-decoration: underline; }
