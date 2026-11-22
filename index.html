@@ -604,7 +604,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     avaliacao: { campo: 'Valor Avaliação Num', titulo: 'Valor de avaliação', escala: 1, minimo: null, maximo: null }
   };
   const formatadorInteiro = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
-  const formatadorPercentual = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 2 });
+  const formatadorPercentual = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
 
   function numeroFiltro(valor) {
     const n = Number(valor);
@@ -714,7 +714,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         slider.type = 'range';
         slider.min = String(extremos.minimo);
         slider.max = String(maxSlider);
-        slider.step = filtro.escala === 100 ? '0.1' : '1';
+        slider.step = '1';
         slider.value = String(lado === 'minimo' ? extremos.minimo : maxSlider);
         slider.className = 'intervalo-slider intervalo-slider-' + lado;
         slider.id = 'slider-' + chave + '-' + lado;
