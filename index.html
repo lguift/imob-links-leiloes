@@ -603,9 +603,14 @@ document.addEventListener('DOMContentLoaded', async function () {
     return Number.isFinite(n) ? n : null;
   }
 
+  const cacheExtremos = {};
   function extremosFiltro(campo) {
+    if (cacheExtremos[campo]) return cacheExtremos[campo];
     const numeros = imoveisOriginais.map(i => numeroFiltro(i[campo])).filter(n => n !== null);
-    return numeros.length ? { minimo: Math.min(...numeros), maximo: Math.max(...numeros) } : { minimo: 0, maximo: 0 };
+    cacheExtremos[campo] = numeros.length
+      ? { minimo: Math.min(...numeros), maximo: Math.max(...numeros) }
+      : { minimo: 0, maximo: 0 };
+    return cacheExtremos[campo];
   }
 
   function intervaloAtivo(filtro, imovel) {
@@ -871,7 +876,8 @@ document.addEventListener('DOMContentLoaded', async function () {
       total + ' imóveis';
 
     const opcoesSelecionadas = Object.values(filtrosSelecionados)
-      .reduce((soma, valores) => soma + (valores ? valores.length : 0), 0);
+      .reduce((soma, valores) => soma + (valores ? valores.length : 0), 0) +
+      Object.values(filtrosIntervalo).filter(filtro => filtro.minimo !== null || filtro.maximo !== null).length;
     document.getElementById('mobile-filter-status').textContent =
       opcoesSelecionadas
         ? opcoesSelecionadas + ' opções · ' + total.toLocaleString('pt-BR') + ' imóveis'
