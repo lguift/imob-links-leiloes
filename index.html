@@ -79,6 +79,11 @@
       border-bottom: 1px solid #ccc;
     }
 
+    .imovel-endereco { display: flex; align-items: center; gap: 8px; min-width: 0; }
+    .foto-imovel-link { display: block; flex: 0 0 56px; width: 56px; height: 42px; }
+    .foto-imovel { display: block; width: 56px; height: 42px; border: 1px solid #d5dce5; border-radius: 4px; background: #f4f4f4; object-fit: cover; }
+    .imovel-endereco .endereco-mapa { min-width: 0; overflow-wrap: anywhere; }
+
     .intervalo-campos { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .intervalo-campo { display: flex !important; align-items: center; gap: 5px; margin: 0 !important; font-weight: normal !important; }
     .intervalo-campo input { width: 100%; min-width: 0; padding: 5px 6px; border: 1px solid #c9d4e0; border-radius: 4px; font-size: 12px; }
@@ -884,11 +889,35 @@ document.addEventListener('DOMContentLoaded', async function () {
       const endereco = imovel["Endereço mapa"];
 
       const tdEnd = document.createElement('td');
+      const enderecoWrap = document.createElement('div');
+      enderecoWrap.className = 'imovel-endereco';
+      const numeroImovel = String(imovel['N° do imóvel'] || '').replace(/\\D/g, '');
+      if (numeroImovel) {
+        const fotoLink = document.createElement('a');
+        fotoLink.className = 'foto-imovel-link';
+        fotoLink.href = imovel['Link'] || '#';
+        fotoLink.target = '_blank';
+        fotoLink.rel = 'noopener';
+        fotoLink.setAttribute('aria-label', 'Abrir imóvel na Caixa');
+        const foto = document.createElement('img');
+        foto.className = 'foto-imovel';
+        foto.src = 'https://venda-imoveis.caixa.gov.br/fotos/F' + numeroImovel.padStart(13, '0') + '21.jpg';
+        foto.alt = 'Foto do imóvel';
+        foto.loading = 'lazy';
+        foto.decoding = 'async';
+        foto.referrerPolicy = 'no-referrer';
+        foto.onerror = () => fotoLink.remove();
+        fotoLink.appendChild(foto);
+        enderecoWrap.appendChild(fotoLink);
+      }
       const aMapa = document.createElement('a');
+      aMapa.className = 'endereco-mapa';
       aMapa.href = 'https://maps.google.com/maps?q=' + encodeURIComponent(endereco);
       aMapa.textContent = endereco;
       aMapa.target = '_blank';
-      tdEnd.appendChild(aMapa);
+      aMapa.rel = 'noopener';
+      enderecoWrap.appendChild(aMapa);
+      tdEnd.appendChild(enderecoWrap);
       tr.appendChild(tdEnd);
 
       ['Valor de avaliação','Preço','Desconto ok'].forEach(c => {
