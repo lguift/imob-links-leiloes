@@ -209,9 +209,16 @@
 
     table {
       width: 100%;
+      table-layout: fixed;
       border-collapse: collapse;
       font-size: 13px;
     }
+
+    #tabela col.col-endereco { width: 57%; }
+    #tabela col.col-avaliacao { width: 18%; }
+    #tabela col.col-preco { width: 9%; }
+    #tabela col.col-desconto { width: 9%; }
+    #tabela col.col-link { width: 7%; }
 
     thead {
       background-color: #e9ecef;
@@ -226,6 +233,8 @@
       text-align: left;
       vertical-align: middle;
     }
+
+    #tabela th { white-space: nowrap; }
 
     a { color: #007bff; text-decoration: none; }
     a:hover { text-decoration: underline; }
@@ -427,10 +436,14 @@
         display: block;
         width: 100%;
         min-width: 0;
+        table-layout: auto;
         border-collapse: separate;
         border-spacing: 0;
         font-size: 13px;
       }
+
+      #tabela colgroup { display: none; }
+      #tabela th { white-space: normal; }
 
       thead { display: none; }
 
@@ -568,6 +581,13 @@
 
     <div class="tabela-container">
       <table id="tabela">
+        <colgroup>
+          <col class="col-endereco">
+          <col class="col-avaliacao">
+          <col class="col-preco">
+          <col class="col-desconto">
+          <col class="col-link">
+        </colgroup>
         <thead>
           <tr>
             <th data-sort="Endereço mapa" style="cursor:pointer">Endereço Mapa ↕</th>
