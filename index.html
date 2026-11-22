@@ -749,8 +749,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
   const ordemFiltros = [
     'Região','UF','Cidade','Bairro','Tipo Imóvel',
-	'Quartos','Vagas de garagem','Financiamento','Faixa Preço',
-	'Faixa Desconto','Modalidade de venda'
+    'Quartos','Vagas de garagem','Financiamento','Modalidade de venda'
   ];
 
   function pegar(obj, ...nomes) {
@@ -772,7 +771,6 @@ document.addEventListener('DOMContentLoaded', async function () {
   function atualizarFiltros() {
     const container = document.getElementById('filtros');
     container.innerHTML = '';
-    desenharFiltrosIntervalo(container);
 
     ordemFiltros.forEach(campo => {
       // Recalcula as opcoes com os outros filtros e ignora o campo atual.
@@ -837,6 +835,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
       div.appendChild(box);
       container.appendChild(div);
+      if (campo === 'Tipo Imóvel') desenharFiltrosIntervalo(container);
     });
   }
 
