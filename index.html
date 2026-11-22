@@ -82,7 +82,13 @@
     .intervalo-campos { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .intervalo-campo { display: flex !important; align-items: center; gap: 5px; margin: 0 !important; font-weight: normal !important; }
     .intervalo-campo input { width: 100%; min-width: 0; padding: 5px 6px; border: 1px solid #c9d4e0; border-radius: 4px; font-size: 12px; }
-    .intervalo-slider { display: block; width: 100%; height: 18px; margin: 2px 0 0; accent-color: #0056b3; }
+    .intervalo-sliders { position: relative; height: 22px; margin: 3px 8px 0; --inicio: 0%; --fim: 100%; }
+    .intervalo-trilho { position: absolute; top: 9px; left: 0; right: 0; height: 5px; border-radius: 5px; background: linear-gradient(to right, #c9c9c9 0%, #c9c9c9 var(--inicio), #0056b3 var(--inicio), #0056b3 var(--fim), #c9c9c9 var(--fim), #c9c9c9 100%); }
+    .intervalo-slider { position: absolute; top: 0; left: 0; width: 100%; height: 22px; margin: 0; appearance: none; background: transparent; pointer-events: none; }
+    .intervalo-slider::-webkit-slider-runnable-track { height: 5px; background: transparent; }
+    .intervalo-slider::-moz-range-track { height: 5px; background: transparent; }
+    .intervalo-slider::-webkit-slider-thumb { width: 16px; height: 16px; margin-top: -5.5px; border: 0; border-radius: 50%; background: #0056b3; appearance: none; pointer-events: auto; cursor: grab; }
+    .intervalo-slider::-moz-range-thumb { width: 16px; height: 16px; border: 0; border-radius: 50%; background: #0056b3; pointer-events: auto; cursor: grab; }
 
     .filtro-titulo {
       display: flex;
@@ -593,40 +599,88 @@ document.addEventListener('DOMContentLoaded', async function () {
   let colunaOrdenacao = null;
   let ordemCrescente = true;
   const filtrosIntervalo = {
-    preco: { campo: 'Preço Num', titulo: 'Preço', minimo: null, maximo: null },
-    desconto: { campo: 'Desconto Num', titulo: 'Desconto', minimo: null, maximo: null },
-    avaliacao: { campo: 'Valor Avaliação Num', titulo: 'Valor de avaliação', minimo: null, maximo: null }
+    preco: { campo: 'Preço Num', titulo: 'Preço', escala: 1, minimo: null, maximo: null },
+    desconto: { campo: 'Desconto Num', titulo: 'Desconto', escala: 100, minimo: null, maximo: null, sufixo: '%' },
+    avaliacao: { campo: 'Valor Avaliação Num', titulo: 'Valor de avaliação', escala: 1, minimo: null, maximo: null }
   };
+  const formatadorInteiro = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
+  const formatadorPercentual = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 2 });
 
   function numeroFiltro(valor) {
     const n = Number(valor);
     return Number.isFinite(n) ? n : null;
   }
 
+  function lerNumeroPt(valor) {
+    const texto = String(valor ?? '').trim().replace(/\s/g, '').replace(/[^\d,.-]/g, '');
+    if (!texto) return null;
+    const normalizado = texto.includes(',')
+      ? texto.replace(/\./g, '').replace(',', '.')
+      : texto.replace(/\./g, '');
+    const numero = Number(normalizado);
+    return Number.isFinite(numero) ? numero : null;
+  }
+
+  function formatarIntervalo(filtro, valor) {
+    if (valor === null) return '';
+    const formatador = filtro.escala === 100 ? formatadorPercentual : formatadorInteiro;
+    return formatador.format(valor) + (filtro.sufixo || '');
+  }
+
   const cacheExtremos = {};
-  function extremosFiltro(campo) {
-    if (cacheExtremos[campo]) return cacheExtremos[campo];
-    const numeros = imoveisOriginais.map(i => numeroFiltro(i[campo])).filter(n => n !== null);
-    cacheExtremos[campo] = numeros.length
+  function extremosFiltro(filtro) {
+    if (cacheExtremos[filtro.campo]) return cacheExtremos[filtro.campo];
+    const numeros = imoveisOriginais
+      .map(i => numeroFiltro(i[filtro.campo]))
+      .filter(n => n !== null)
+      .map(n => n * filtro.escala);
+    cacheExtremos[filtro.campo] = numeros.length
       ? { minimo: Math.min(...numeros), maximo: Math.max(...numeros) }
       : { minimo: 0, maximo: 0 };
-    return cacheExtremos[campo];
+    return cacheExtremos[filtro.campo];
   }
 
   function intervaloAtivo(filtro, imovel) {
     if (filtro.minimo === null && filtro.maximo === null) return true;
-    const valor = numeroFiltro(imovel[filtro.campo]);
-    if (valor === null) return false;
+    const valorBase = numeroFiltro(imovel[filtro.campo]);
+    if (valorBase === null) return false;
+    const valor = valorBase * filtro.escala;
     return (filtro.minimo === null || valor >= filtro.minimo) &&
       (filtro.maximo === null || valor <= filtro.maximo);
   }
 
+  function atualizarVisualIntervalo(chave) {
+    const filtro = filtrosIntervalo[chave];
+    const grupo = document.getElementById('intervalo-grupo-' + chave);
+    if (!grupo) return;
+    const extremos = extremosFiltro(filtro);
+    const maxSlider = extremos.maximo > extremos.minimo ? extremos.maximo : extremos.minimo + 1;
+    const valorMinimo = filtro.minimo === null ? extremos.minimo : filtro.minimo;
+    const valorMaximo = filtro.maximo === null ? maxSlider : filtro.maximo;
+    const campoMinimo = document.getElementById('intervalo-' + chave + '-minimo');
+    const campoMaximo = document.getElementById('intervalo-' + chave + '-maximo');
+    if (campoMinimo) campoMinimo.value = formatarIntervalo(filtro, filtro.minimo);
+    if (campoMaximo) campoMaximo.value = formatarIntervalo(filtro, filtro.maximo);
+
+    const sliderMinimo = document.getElementById('slider-' + chave + '-minimo');
+    const sliderMaximo = document.getElementById('slider-' + chave + '-maximo');
+    if (sliderMinimo) sliderMinimo.value = String(valorMinimo);
+    if (sliderMaximo) sliderMaximo.value = String(valorMaximo);
+    const amplitude = maxSlider - extremos.minimo || 1;
+    const inicio = Math.max(0, Math.min(100, ((valorMinimo - extremos.minimo) / amplitude) * 100));
+    const fim = Math.max(inicio, Math.min(100, ((valorMaximo - extremos.minimo) / amplitude) * 100));
+    grupo.style.setProperty('--inicio', inicio + '%');
+    grupo.style.setProperty('--fim', fim + '%');
+  }
+
   function desenharFiltrosIntervalo(container) {
     Object.entries(filtrosIntervalo).forEach(([chave, filtro]) => {
-      const extremos = extremosFiltro(filtro.campo);
-      const topoSlider = extremos.maximo > extremos.minimo ? extremos.maximo : extremos.minimo + 1;
+      const extremos = extremosFiltro(filtro);
+      const maxSlider = extremos.maximo > extremos.minimo ? extremos.maximo : extremos.minimo + 1;
       const div = document.createElement('div');
       div.className = 'filtro filtro-intervalo';
+      div.id = 'intervalo-grupo-' + chave;
+
       const titulo = document.createElement('label');
       titulo.textContent = filtro.titulo;
       div.appendChild(titulo);
@@ -638,41 +692,50 @@ document.addEventListener('DOMContentLoaded', async function () {
         rotulo.className = 'intervalo-campo';
         rotulo.appendChild(document.createTextNode(lado === 'minimo' ? 'Mín.' : 'Máx.'));
         const entrada = document.createElement('input');
-        entrada.type = 'number';
-        entrada.step = 'any';
-        entrada.min = String(extremos.minimo);
-        entrada.max = String(extremos.maximo);
-        entrada.placeholder = lado === 'minimo' ? String(extremos.minimo) : String(extremos.maximo);
-        entrada.value = filtro[lado] === null ? '' : String(filtro[lado]);
+        entrada.type = 'text';
+        entrada.inputMode = 'decimal';
+        entrada.placeholder = formatarIntervalo(filtro, lado === 'minimo' ? extremos.minimo : extremos.maximo);
+        entrada.value = formatarIntervalo(filtro, filtro[lado]);
         entrada.id = 'intervalo-' + chave + '-' + lado;
         entrada.setAttribute('aria-label', filtro.titulo + ' ' + (lado === 'minimo' ? 'mínimo' : 'máximo'));
-        entrada.addEventListener('change', () => alterarIntervalo(chave, lado, entrada.value));
+        entrada.addEventListener('change', () => alterarIntervalo(chave, lado, entrada.value, false));
         rotulo.appendChild(entrada);
         campos.appendChild(rotulo);
       });
       div.appendChild(campos);
 
-      ['minimo', 'maximo'].forEach(lado => {
+      const controles = document.createElement('div');
+      controles.className = 'intervalo-sliders';
+      const trilho = document.createElement('div');
+      trilho.className = 'intervalo-trilho';
+      controles.appendChild(trilho);
+      ['minimo', 'maximo'].forEach((lado, indice) => {
         const slider = document.createElement('input');
         slider.type = 'range';
         slider.min = String(extremos.minimo);
-        slider.max = String(topoSlider);
-        slider.step = 'any';
-        slider.value = String(filtro[lado] === null ? (lado === 'minimo' ? extremos.minimo : topoSlider) : filtro[lado]);
-        slider.className = 'intervalo-slider';
+        slider.max = String(maxSlider);
+        slider.step = filtro.escala === 100 ? '0.1' : '1';
+        slider.value = String(lado === 'minimo' ? extremos.minimo : maxSlider);
+        slider.className = 'intervalo-slider intervalo-slider-' + lado;
+        slider.id = 'slider-' + chave + '-' + lado;
         slider.setAttribute('aria-label', filtro.titulo + ' ' + (lado === 'minimo' ? 'mínimo' : 'máximo'));
+        slider.style.zIndex = String(indice + 1);
+        slider.addEventListener('pointerdown', () => { slider.style.zIndex = '3'; });
         slider.addEventListener('input', () => alterarIntervalo(chave, lado, slider.value, true));
-        div.appendChild(slider);
+        controles.appendChild(slider);
       });
+      div.appendChild(controles);
       container.appendChild(div);
+      atualizarVisualIntervalo(chave);
     });
   }
 
   function alterarIntervalo(chave, lado, bruto, slider = false) {
     const filtro = filtrosIntervalo[chave];
-    const extremos = extremosFiltro(filtro.campo);
-    let valor = bruto === '' ? null : numeroFiltro(bruto);
+    const extremos = extremosFiltro(filtro);
+    let valor = bruto === '' ? null : (slider ? numeroFiltro(bruto) : lerNumeroPt(bruto));
     if (valor !== null) {
+      valor = Math.max(extremos.minimo, Math.min(extremos.maximo, valor));
       if (lado === 'minimo' && valor <= extremos.minimo) valor = null;
       if (lado === 'maximo' && valor >= extremos.maximo) valor = null;
     }
@@ -680,34 +743,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (filtro.minimo !== null && filtro.maximo !== null && filtro.minimo > filtro.maximo) {
       filtro[lado === 'minimo' ? 'maximo' : 'minimo'] = valor;
     }
-    const extremosAtualizados = extremosFiltro(filtro.campo);
-    ['minimo', 'maximo'].forEach(posicao => {
-      const entrada = document.getElementById('intervalo-' + chave + '-' + posicao);
-      if (entrada) entrada.value = filtro[posicao] === null ? '' : String(filtro[posicao]);
-    });
-    if (slider) {
-      const entradas = document.querySelectorAll('#filtros .filtro-intervalo');
-      const indice = Object.keys(filtrosIntervalo).indexOf(chave);
-      const grupo = entradas[indice];
-      if (grupo) {
-        const sliders = grupo.querySelectorAll('input[type="range"]');
-        sliders[0].value = String(filtro.minimo === null ? extremosAtualizados.minimo : filtro.minimo);
-        sliders[1].value = String(filtro.maximo === null ? Math.max(extremosAtualizados.maximo, extremosAtualizados.minimo + 1) : filtro.maximo);
-      }
-    } else {
-      const entradas = document.querySelectorAll('#filtros .filtro-intervalo');
-      const indice = Object.keys(filtrosIntervalo).indexOf(chave);
-      const grupo = entradas[indice];
-      if (grupo) {
-        const sliders = grupo.querySelectorAll('input[type="range"]');
-        sliders[0].value = String(filtro.minimo === null ? extremosAtualizados.minimo : filtro.minimo);
-        sliders[1].value = String(filtro.maximo === null ? Math.max(extremosAtualizados.maximo, extremosAtualizados.minimo + 1) : filtro.maximo);
-      }
-    }
+    atualizarVisualIntervalo(chave);
     paginaAtual = 1;
     atualizarInterface(false);
   }
-
   const ordemFiltros = [
     'Região','UF','Cidade','Bairro','Tipo Imóvel',
 	'Quartos','Vagas de garagem','Financiamento','Faixa Preço',
