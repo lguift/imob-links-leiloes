@@ -82,7 +82,8 @@
     .imovel-endereco { display: flex; align-items: center; gap: 8px; min-width: 0; }
     .foto-imovel-link { display: block; flex: 0 0 112px; width: 112px; height: 84px; }
     .foto-imovel { display: block; width: 112px; height: 84px; border: 1px solid #d5dce5; border-radius: 4px; background: #f4f4f4; object-fit: cover; }
-    .imovel-endereco .endereco-mapa { min-width: 0; overflow-wrap: anywhere; }
+    .imovel-endereco .endereco-mapa { display: flex; min-width: 0; flex-direction: column; gap: 2px; overflow-wrap: anywhere; }
+    .endereco-localidade { color: #555; font-size: 12px; font-weight: normal; }
 
     .intervalo-campos { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .intervalo-campo { display: flex !important; align-items: center; gap: 5px; margin: 0 !important; font-weight: normal !important; }
@@ -913,7 +914,17 @@ document.addEventListener('DOMContentLoaded', async function () {
       const aMapa = document.createElement('a');
       aMapa.className = 'endereco-mapa';
       aMapa.href = 'https://maps.google.com/maps?q=' + encodeURIComponent(endereco);
-      aMapa.textContent = endereco;
+      const enderecoPrincipal = String(imovel['Endereço'] || '').trim() || String(endereco || '').trim();
+      const cidadeUf = [String(imovel['Cidade'] || '').trim(), String(imovel['UF'] || '').trim()].filter(Boolean).join(' - ');
+      const linhaEndereco = document.createElement('span');
+      linhaEndereco.textContent = enderecoPrincipal;
+      aMapa.appendChild(linhaEndereco);
+      if (cidadeUf) {
+        const linhaLocalidade = document.createElement('span');
+        linhaLocalidade.className = 'endereco-localidade';
+        linhaLocalidade.textContent = cidadeUf;
+        aMapa.appendChild(linhaLocalidade);
+      }
       aMapa.target = '_blank';
       aMapa.rel = 'noopener';
       enderecoWrap.appendChild(aMapa);
