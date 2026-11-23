@@ -5,6 +5,10 @@ function json(data, status = 200) {
   });
 }
 
+export async function onRequestGet({ env }) {
+  return json({ ok: Boolean(env.GOOGLE_APPS_SCRIPT_URL) });
+}
+
 export async function onRequestPost({ request, env }) {
   if (!env.GOOGLE_APPS_SCRIPT_URL) return json({ ok: false, error: "not_configured" }, 503);
 
@@ -28,8 +32,8 @@ export async function onRequestPost({ request, env }) {
       cidade: request.cf?.city || "",
       regiao: request.cf?.region || "",
       pais: request.cf?.country || "",
-      origem,
-      pagina: new URL(request.url).pathname.slice(0, 120)
+      origem: String(body.origem || origem).slice(0, 120),
+      pagina: String(body.pagina || "/").slice(0, 120)
     };
   } else if (body.tipo === "sugestao") {
     if (String(body.site || "").trim()) return json({ ok: true });
