@@ -531,6 +531,24 @@
         font-size: 11px !important;
       }
     }
+
+    .engagement-backdrop[hidden]{display:none!important}
+    .engagement-backdrop{position:fixed;inset:0;z-index:10010;display:grid;place-items:center;padding:18px;background:rgba(7,21,47,.68)}
+    .engagement-dialog{width:min(520px,100%);max-height:min(90vh,760px);overflow:auto;padding:24px;border-radius:14px;background:#fff;color:#3f4650;box-shadow:0 18px 60px #0005}
+    .engagement-dialog h2{margin:0 0 10px;color:#123f78;font-size:22px}
+    .engagement-dialog p{margin:10px 0;line-height:1.5}
+    .engagement-dialog a{color:#0056b3}
+    .engagement-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .engagement-actions button,.engagement-submit{border:0;border-radius:7px;padding:10px 14px;font:inherit;font-weight:700;cursor:pointer}
+    .engagement-primary{background:#f5a400;color:#18243a}
+    .engagement-secondary{background:#eef2f7;color:#374151}
+    .engagement-dialog textarea{width:100%;min-height:130px;margin-top:8px;padding:10px;border:1px solid #c9d4e0;border-radius:7px;font:inherit;resize:vertical}
+    .engagement-dialog .engagement-note{font-size:13px;color:#596579}
+    #engagement-status{min-height:20px;margin-top:8px;font-size:14px}
+    #suggestion-launcher{position:fixed;right:20px;bottom:38px;z-index:10000;border:0;border-radius:24px;padding:11px 16px;background:#f5a400;color:#17233b;font:inherit;font-weight:800;box-shadow:0 3px 12px #0003;cursor:pointer}
+    #manage-metrics{position:fixed;left:12px;bottom:38px;z-index:9999;border:0;background:transparent;color:#0056b3;font:inherit;font-size:11px;text-decoration:underline;cursor:pointer}
+    @media(max-width:760px){.engagement-dialog{padding:19px}.engagement-dialog h2{font-size:20px}#suggestion-launcher{right:12px;bottom:44px}#manage-metrics{left:8px;bottom:44px}}
+
   </style>
 </head>
 <footer style="
@@ -549,6 +567,37 @@
     Imob Links Leilões — ferramenta independente de consulta. Confirme sempre os dados no anúncio oficial e no edital. <a href="./institucional.html#sobre">Sobre</a> · <a href="./institucional.html#privacidade">Privacidade</a> · <a href="./institucional.html#contato">Contato</a>
 </footer>
 <body>
+
+<div class="engagement-backdrop" id="welcome-layer" hidden>
+  <section class="engagement-dialog" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
+    <h2 id="welcome-title">Boas-vindas ao Imob Links Leilões!</h2>
+    <p>Ficamos felizes com sua visita. O site reúne imóveis anunciados pela Caixa e links para você conferir as informações nos canais oficiais.</p>
+    <p>Se aceitar, registraremos a data e hora, cidade, estado/região e país aproximados, a página visitada e o domínio de origem do clique, para contar visitas e entender de quais regiões vêm os acessos. Esses dados serão guardados em planilha privada; o IP não será incluído nela. Você pode mudar sua escolha depois pelo link “Preferências de métricas”.</p>
+    <p class="engagement-note">A lista é independente. Confirme sempre as condições no anúncio oficial e no edital. Consulte nossa <a href="./institucional.html#privacidade" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
+    <p><a href="https://www.instagram.com/imob_links_leiloes_caixa/" target="_blank" rel="noopener">Instagram @imob_links_leiloes_caixa</a></p>
+    <div class="engagement-actions">
+      <button class="engagement-primary" id="accept-metrics" type="button">Aceitar métricas e continuar</button>
+      <button class="engagement-secondary" id="decline-metrics" type="button">Não obrigado</button>
+      <a class="engagement-secondary" id="share-whatsapp" href="#" target="_blank" rel="noopener">Compartilhar no WhatsApp</a>
+    </div>
+  </section>
+</div>
+<div class="engagement-backdrop" id="suggestion-layer" hidden>
+  <section class="engagement-dialog" role="dialog" aria-modal="true" aria-labelledby="suggestion-title">
+    <h2 id="suggestion-title">Deixe sua sugestão ou mensagem</h2>
+    <p class="engagement-note">Sua mensagem ficará em uma planilha privada separada da planilha de métricas. Não informe dados pessoais nem informações bancárias.</p>
+    <label for="suggestion-message">Mensagem</label>
+    <textarea id="suggestion-message" maxlength="3000" required></textarea>
+    <input id="suggestion-site" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px">
+    <div class="engagement-actions">
+      <button class="engagement-primary" id="send-suggestion" type="button">Enviar mensagem</button>
+      <button class="engagement-secondary" id="close-suggestion" type="button">Fechar</button>
+    </div>
+    <p id="engagement-status" role="status" aria-live="polite"></p>
+  </section>
+</div>
+<button id="suggestion-launcher" type="button" hidden>Deixe sua sugestão ou mensagem</button>
+<button id="manage-metrics" type="button" hidden>Preferências de métricas</button>
 
 <section class="site-top"><div class="site-top-inner"><div class="site-brand"><img src="./logo.svg" alt="Símbolo Imob Links Leilões"><div class="wordmark">IMOB <span>LINKS</span> LEILÕES</div></div><nav class="site-nav" aria-label="Navegação principal"><a class="cta" href="#tabela">VER IMÓVEIS ↓</a><a href="./institucional.html#como-funciona">Como funcionam os leilões</a><a href="./institucional.html#guia-caixa">Guia Caixa</a><a href="./institucional.html#orientacoes">Financiamento e riscos</a><a href="./institucional.html#sobre">Sobre o site</a><a href="./institucional.html#contato">Contato</a><a href="./institucional.html#privacidade">Privacidade</a></nav></div></section>
 
@@ -1106,6 +1155,102 @@ atualizarInterface();
     console.error('Falha ao carregar imoveis.json:', erro);
   }
 });
+</script>
+
+
+<script>
+(() => {
+  const endpoint = "/api/submit";
+  const consentKey = "imobMetricsConsentV1";
+  const sessionKey = "imobVisitLoggedV1";
+  const welcome = document.getElementById("welcome-layer");
+  const suggestion = document.getElementById("suggestion-layer");
+  const launcher = document.getElementById("suggestion-launcher");
+  const manage = document.getElementById("manage-metrics");
+  const status = document.getElementById("engagement-status");
+
+  async function enviar(payload) {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || result.ok !== true) throw new Error("Falha no envio");
+  }
+
+  async function registrarVisita() {
+    if (sessionStorage.getItem(sessionKey)) return;
+    let origem = "";
+    try { if (document.referrer) origem = new URL(document.referrer).hostname; } catch {}
+    await enviar({
+      tipo: "visita",
+      consentimento: true,
+      origem,
+      pagina: location.pathname
+    });
+    sessionStorage.setItem(sessionKey, "1");
+  }
+
+  async function iniciar() {
+    try {
+      const response = await fetch(endpoint, { cache: "no-store" });
+      const config = await response.json();
+      if (!response.ok || config.ok !== true) return;
+    } catch { return; }
+
+    launcher.hidden = false;
+    manage.hidden = false;
+    const consent = localStorage.getItem(consentKey);
+    if (consent === "sim") {
+      registrarVisita().catch(() => {});
+    } else if (consent !== "nao") {
+      welcome.hidden = false;
+    }
+
+    document.getElementById("accept-metrics").addEventListener("click", async () => {
+      localStorage.setItem(consentKey, "sim");
+      welcome.hidden = true;
+      try { await registrarVisita(); } catch {}
+    });
+    document.getElementById("decline-metrics").addEventListener("click", () => {
+      localStorage.setItem(consentKey, "nao");
+      welcome.hidden = true;
+    });
+    document.getElementById("share-whatsapp").href =
+      "https://wa.me/?text=" + encodeURIComponent("Conheça o Imob Links Leilões: " + location.origin);
+
+    launcher.addEventListener("click", () => {
+      document.getElementById("suggestion-message").value = "";
+      document.getElementById("suggestion-site").value = "";
+      status.textContent = "";
+      suggestion.hidden = false;
+    });
+    document.getElementById("close-suggestion").addEventListener("click", () => suggestion.hidden = true);
+    document.getElementById("send-suggestion").addEventListener("click", async () => {
+      const message = document.getElementById("suggestion-message").value.trim();
+      if (message.length < 3) { status.textContent = "Escreva uma mensagem antes de enviar."; return; }
+      status.textContent = "Enviando…";
+      try {
+        await enviar({
+          tipo: "sugestao",
+          mensagem: message,
+          site: document.getElementById("suggestion-site").value
+        });
+        status.textContent = "Obrigado! Sua mensagem foi enviada.";
+        document.getElementById("suggestion-message").value = "";
+      } catch {
+        status.textContent = "Não foi possível enviar agora. Tente novamente mais tarde.";
+      }
+    });
+    manage.addEventListener("click", () => {
+      welcome.hidden = false;
+      document.getElementById("accept-metrics").textContent = "Aceitar métricas e continuar";
+      document.getElementById("decline-metrics").textContent = "Revogar e continuar sem métricas";
+    });
+  }
+  iniciar();
+})();
 </script>
 
   <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"515a040b6ed645b8be06be6229348d35"}'></script><!-- End Cloudflare Web Analytics -->
