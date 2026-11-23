@@ -75,7 +75,7 @@ function doPost(e) {
 }
 
 function texto(value, limite) {
-  return String(value || '').replace(/[\\u0000-\\u001f\\u007f]/g, ' ').slice(0, limite);
+  return String(value || '').replace(/[\\x00-\\x1f\\x7f]/g, ' ').slice(0, limite);
 }
 
 function resposta(value) {
