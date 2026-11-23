@@ -242,8 +242,20 @@
       vertical-align: middle;
     }
 
-    #tabela th[data-sort] { white-space: nowrap; }
+    #tabela th[data-sort] { white-space: normal; }
+    #tabela th[data-sort] .sort-heading { display: flex; align-items: center; gap: 4px; min-width: 0; }
+    #tabela th[data-sort] .sort-label { flex: 1 1 auto; min-width: 0; }
+    #tabela th[data-sort] .sort-arrow { flex: 0 0 auto; white-space: nowrap; }
     #tabela th:not([data-sort]) { white-space: normal; }
+
+    @media (min-width: 1101px) and (max-width: 1250px) {
+      #tabela col.col-endereco { width: 50%; }
+      #tabela col.col-avaliacao { width: 19%; }
+      #tabela col.col-preco { width: 10%; }
+      #tabela col.col-desconto { width: 11%; }
+      #tabela col.col-link { width: 10%; }
+      #tabela th, #tabela td { padding-left: 6px; padding-right: 6px; }
+    }
 
     a { color: #007bff; text-decoration: none; }
     a:hover { text-decoration: underline; }
@@ -653,10 +665,10 @@
         </colgroup>
         <thead>
           <tr>
-            <th data-sort="Endereço mapa" style="cursor:pointer">Endereço Mapa ↕</th>
-            <th data-sort="Valor Avaliação Num" style="cursor:pointer">Valor de avaliação ↕</th>
-            <th data-sort="Preço Num" style="cursor:pointer">Preço ↕</th>
-            <th data-sort="Desconto Num" style="cursor:pointer">Desconto ↕</th>
+            <th data-sort="Endereço mapa" style="cursor:pointer"><span class="sort-heading"><span class="sort-label">Endereço Mapa</span><span class="sort-arrow" aria-hidden="true">↕</span></span></th>
+            <th data-sort="Valor Avaliação Num" style="cursor:pointer"><span class="sort-heading"><span class="sort-label">Valor de avaliação</span><span class="sort-arrow" aria-hidden="true">↕</span></span></th>
+            <th data-sort="Preço Num" style="cursor:pointer"><span class="sort-heading"><span class="sort-label">Preço</span><span class="sort-arrow" aria-hidden="true">↕</span></span></th>
+            <th data-sort="Desconto Num" style="cursor:pointer"><span class="sort-heading"><span class="sort-label">Desconto</span><span class="sort-arrow" aria-hidden="true">↕</span></span></th>
             <th>Link site Caixa</th>
           </tr>
         </thead>
