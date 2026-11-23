@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8370749860360749"
+     crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imob Links Leilões | Lista de Imóveis Caixa</title>
+  <meta name="description" content="Consulte imóveis de leilão da Caixa, filtre por região, cidade, preço e desconto. Confira guias e orientações para comprar com segurança.">
+
+  <style>
+    .site-top{background:linear-gradient(110deg,#07152f,#123f9c);color:#fff;padding:2px 16px;}
+    .site-top-inner{max-width:1500px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px;}
+    .site-brand{display:flex;align-items:center;gap:10px;white-space:nowrap;}.site-brand img{display:block;width:112px;height:58px;object-fit:contain;}.site-brand .wordmark{font-size:22px;font-weight:900;letter-spacing:.2px;color:#fff;}.site-brand .wordmark span{color:#f5a400;}
+    
+    .site-nav{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+    .site-nav a{color:#fff;text-decoration:none;font-size:13px;font-weight:600;}
+    .site-nav a:hover{color:#ffc34b;text-decoration:none;}
+    .site-nav .cta{flex:0 0 auto;background:#f5a400;color:#101d38;padding:6px 11px;border-radius:6px;font-size:12px;font-weight:bold;text-decoration:none;}
+    .site-nav .cta:hover{color:#101d38;background:#ffc34b;}
+    .header-copy{display:flex;min-width:0;flex-direction:column;gap:1px;}
+    .header-title{font-size:inherit;line-height:1.1;}
+    .header-headline{font-size:18px;line-height:1.2;margin:0;}
+    .header-description{font-size:12px;line-height:1.1;font-weight:normal;color:#e1e9fb;}
+    .header-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+    @media(max-width:760px){.site-top{padding:4px 10px}.site-top-inner{align-items:flex-start;flex-direction:column;gap:5px}.site-brand img{width:88px;height:46px}.site-brand .wordmark{font-size:17px}.site-nav{gap:9px}.site-nav a{font-size:11px}.site-nav .cta{font-size:10px;padding:6px 8px;white-space:nowrap}.header-headline{font-size:16px}.header-description{font-size:11px}.header-meta{align-self:flex-start;flex-direction:column;align-items:flex-end;gap:4px;margin-left:auto}.ad-rail{display:none!important}}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      height: 100vh;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding-bottom: 18px;
+    }
+
+    header {
+      background-color: #004085;
+      color: white;
+      padding: 6px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    #contador {
+      font-size: 16px;
+      background-color: #003366;
+      padding: 6px 12px;
+      border-radius: 4px;
+    }
+
+    .layout {
+      display: flex;
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      flex: 0 0 300px;
+      width: 300px;
+      min-height: 0;
+      background-color: #ffffff;
+      padding: 15px;
+      border-right: 1px solid #ccc;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+      font-size: 13px;
+    }
+
+    .filtro {
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .imovel-endereco { display: flex; align-items: center; gap: 8px; min-width: 0; }
+    .foto-imovel-link { display: block; flex: 0 0 112px; width: 112px; height: 84px; }
+    .foto-imovel { display: block; width: 112px; height: 84px; border: 1px solid #d5dce5; border-radius: 4px; background: #f4f4f4; object-fit: cover; }
+    .imovel-endereco .endereco-mapa { display: flex; min-width: 0; flex-direction: column; gap: 2px; overflow-wrap: anywhere; }
+    .endereco-localidade { color: #555; font-size: 12px; font-weight: normal; }
+
+    .intervalo-campos { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .intervalo-campo { display: flex !important; align-items: center; gap: 5px; margin: 0 !important; font-weight: normal !important; }
+    .intervalo-campo input { width: 100%; min-width: 0; padding: 5px 6px; border: 1px solid #c9d4e0; border-radius: 4px; font-size: 12px; }
+    .intervalo-sliders { position: relative; height: 22px; margin: 3px 8px 0; --inicio: 0%; --fim: 100%; }
+    .intervalo-trilho { position: absolute; top: 9px; left: 0; right: 0; height: 5px; border-radius: 5px; background: linear-gradient(to right, #c9c9c9 0%, #c9c9c9 var(--inicio), #0056b3 var(--inicio), #0056b3 var(--fim), #c9c9c9 var(--fim), #c9c9c9 100%); }
+    .intervalo-slider { position: absolute; top: 0; left: 0; width: 100%; height: 22px; margin: 0; appearance: none; background: transparent; pointer-events: none; }
+    .intervalo-slider::-webkit-slider-runnable-track { height: 5px; background: transparent; }
+    .intervalo-slider::-moz-range-track { height: 5px; background: transparent; }
+    .intervalo-slider::-webkit-slider-thumb { width: 16px; height: 16px; margin-top: -5.5px; border: 0; border-radius: 50%; background: #0056b3; appearance: none; pointer-events: auto; cursor: grab; }
+    .intervalo-slider::-moz-range-thumb { width: 16px; height: 16px; border: 0; border-radius: 50%; background: #0056b3; pointer-events: auto; cursor: grab; }
+
+    .filtro-titulo {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .filtro-titulo label {
+      margin-bottom: 0;
+    }
+
+    .limpar-filtro {
+      border: 0;
+      background: transparent;
+      color: #0056b3;
+      font-size: 11px;
+      padding: 2px 4px;
+      cursor: pointer;
+      text-decoration: underline;
+      white-space: nowrap;
+    }
+
+    .limpar-filtro:disabled {
+      color: #999;
+      cursor: default;
+      text-decoration: none;
+    }
+
+    .filtro label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .busca {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 5px;
+      font-size: 12px;
+    }
+
+    .checkboxes {
+      max-height: 130px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      padding: 5px;
+      background-color: #f9f9f9;
+    }
+
+    .checkboxes label {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 12px;
+    }
+
+    .conteudo {
+      flex: 1 1 0;
+      min-width: 0;
+      min-height: 0;
+      height: 100%;
+      padding: 10px 10px 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .ad-rail {
+      flex: 0 0 170px;
+      width: 170px;
+      padding: 14px 10px 10px 0;
+      background: #f4f4f4;
+    }
+
+    .ad-slot {
+      position: sticky;
+      top: 14px;
+      min-height: 280px;
+      border: 0;
+      border-radius: 6px;
+      background: #f4f4f4;
+      padding: 0;
+    }
+
+    .tabela-container {
+      flex: 1 1 0;
+      min-width: 0;
+      min-height: 0;
+      height: 0;
+      overflow: auto;
+      overscroll-behavior: contain;
+      scrollbar-gutter: stable;
+      background-color: #fff;
+      border: 1px solid #ccc;
+    }
+
+    .tabela-container::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
+    }
+
+    .tabela-container::-webkit-scrollbar-track {
+      background: #e5e5e5;
+    }
+
+    .tabela-container::-webkit-scrollbar-thumb {
+      background: #999;
+      border-radius: 6px;
+      border: 2px solid #e5e5e5;
+    }
+
+    table {
+      width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    #tabela col.col-endereco { width: 55%; }
+    #tabela col.col-avaliacao { width: 18%; }
+    #tabela col.col-preco { width: 9%; }
+    #tabela col.col-desconto { width: 10%; }
+    #tabela col.col-link { width: 8%; }
+
+    thead {
+      background-color: #e9ecef;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    th, td {
+      padding: 6px 10px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    #tabela th[data-sort] { white-space: nowrap; }
+    #tabela th:not([data-sort]) { white-space: normal; }
+
+    a { color: #007bff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    #status-carregamento { padding: 6px 15px; color: #555; font-size: 12px; }
+
+    #paginador {
+      flex: 0 0 auto;
+      display: block;
+      min-height: 30px;
+      text-align: center;
+      margin: 4px 0 0;
+      padding: 0;
+      background: #f4f4f4;
+    }
+
+    #paginador button {
+      padding: 6px 10px;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+
+    /* Controles extras para telefones e telas estreitas. O layout desktop permanece igual. */
+    .mobile-filters { display: contents; }
+    .mobile-filter-toggle { display: none; }
+    .mobile-sort { display: none; }
+
+    @media (max-width: 760px) {
+      body {
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: block;
+        overflow: visible;
+        padding-bottom: 24px;
+      }
+
+      header {
+        padding: 10px 12px;
+        gap: 8px;
+        align-items: flex-start;
+        font-size: 14px;
+      }
+
+      #contador {
+        flex: 0 0 auto;
+        font-size: 12px;
+        padding: 5px 7px;
+        white-space: nowrap;
+      }
+
+      .layout {
+        display: block;
+        overflow: visible;
+      }
+
+      .mobile-filters {
+        display: block;
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        padding: 8px 10px;
+        background: #f4f4f4;
+      }
+
+      .mobile-filter-toggle {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 11px 14px;
+        border: 1px solid #b9cbe0;
+        border-radius: 8px;
+        background: #fff;
+        color: #004085;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      }
+
+      .mobile-filter-toggle[aria-expanded="true"] {
+        background: #eaf2fb;
+      }
+
+      #mobile-filter-status {
+        color: #555;
+        font-size: 12px;
+        font-weight: normal;
+        text-align: right;
+      }
+
+      .sidebar {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 10px;
+        right: 10px;
+        width: auto;
+        max-height: 62vh;
+        max-height: 62dvh;
+        padding: 10px 12px;
+        border: 1px solid #c9d4e0;
+        border-radius: 0 0 10px 10px;
+        background: #fff;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        font-size: 12px;
+      }
+
+      .sidebar.is-open { display: block; }
+
+      .filtro {
+        margin-bottom: 9px;
+        padding-bottom: 7px;
+      }
+
+      .checkboxes { max-height: 105px; }
+
+      .mobile-sort {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 10px 8px;
+        padding: 8px 10px;
+        border: 1px solid #d5dce5;
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .mobile-sort label {
+        flex: 0 0 auto;
+        color: #444;
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      .mobile-sort select {
+        flex: 1;
+        min-width: 0;
+        padding: 7px 8px;
+        border: 1px solid #c9d4e0;
+        border-radius: 6px;
+        background: #fff;
+        color: #222;
+        font-size: 12px;
+      }
+
+      .conteudo {
+        min-width: 0;
+        min-height: 0;
+        padding: 0 8px 0;
+        overflow: visible;
+      }
+
+      .conteudo {
+        display: block;
+        height: auto;
+        overflow: visible;
+      }
+
+      .tabela-container {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: none;
+        min-height: 0;
+        overflow: visible;
+        border: 0;
+        background: transparent;
+      }
+
+      #paginador {
+        position: static !important;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        clear: both;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        margin: 10px 0 0 !important;
+        padding: 10px 4px 0 !important;
+        box-sizing: border-box;
+        background: #f4f4f4;
+        z-index: auto !important;
+      }
+
+      #paginador button,
+      #pagina-info {
+        position: static !important;
+        float: none !important;
+      }
+
+      table {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        table-layout: auto;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 13px;
+      }
+
+      #tabela colgroup { display: none; }
+      #tabela th { white-space: normal; }
+
+      thead { display: none; }
+
+      tbody {
+        display: grid;
+        gap: 2px;
+      }
+
+      tbody tr {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        padding: 2px 6px;
+        border: 1px solid #d5dce5;
+        border-radius: 9px;
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+      }
+
+      tbody td {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1px;
+        padding: 2px 2px;
+        border-bottom: 0;
+        overflow-wrap: anywhere;
+        font-size: 12px;
+      }
+
+      tbody td:first-child {
+        display: block;
+        grid-column: 1 / -1;
+        padding: 3px 2px;
+        border-bottom: 1px solid #edf0f3;
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 1.2;
+      }
+
+      tbody td:first-child a { color: #0056b3; }
+
+      tbody td:nth-child(n+2)::before {
+        color: #555;
+        font-size: 11px;
+        font-weight: bold;
+        line-height: 1.2;
+      }
+
+      tbody td:nth-child(2)::before { content: "Avaliação"; }
+      tbody td:nth-child(3)::before { content: "Preço"; }
+      tbody td:nth-child(4)::before { content: "Desconto"; }
+      tbody td:nth-child(5)::before { content: "Link site Caixa"; }
+
+      tbody td:nth-child(5) a {
+        display: inline-block;
+        width: fit-content;
+        padding: 2px 6px;
+        border-radius: 5px;
+        background: #eaf2fb;
+        font-weight: bold;
+      }
+
+      #paginador {
+        margin: 10px 2px;
+        font-size: 13px;
+      }
+
+      #paginador button {
+        padding: 7px 9px;
+        margin: 0 2px;
+      }
+
+      footer {
+        padding: 5px 8px !important;
+        font-size: 11px !important;
+      }
+    }
+  </style>
+</head>
+<footer style="
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #f4f4f4;
+    border-top: 1px solid #ccc;
+    padding: 2px 15px;
+    font-size: 12px;
+    color: #555;
+    text-align: center;
+    z-index: 9999;
+">
+    Imob Links Leilões — ferramenta independente de consulta. Confirme sempre os dados no anúncio oficial e no edital. <a href="./institucional.html#sobre">Sobre</a> · <a href="./institucional.html#privacidade">Privacidade</a> · <a href="./institucional.html#contato">Contato</a>
+</footer>
+<body>
+
+<section class="site-top"><div class="site-top-inner"><div class="site-brand"><img src="./logo.svg" alt="Símbolo Imob Links Leilões"><div class="wordmark">IMOB <span>LINKS</span> LEILÕES</div></div><nav class="site-nav" aria-label="Navegação principal"><a class="cta" href="#tabela">VER IMÓVEIS ↓</a><a href="./institucional.html#como-funciona">Como funcionam os leilões</a><a href="./institucional.html#guia-caixa">Guia Caixa</a><a href="./institucional.html#orientacoes">Financiamento e riscos</a><a href="./institucional.html#sobre">Sobre o site</a><a href="./institucional.html#contato">Contato</a><a href="./institucional.html#privacidade">Privacidade</a></nav></div></section>
+
+<header>
+  <div class="header-copy">
+    <div class="header-title">LISTA DE IMÓVEIS CAIXA</div>
+    <h1 class="header-headline">Encontre oportunidades em imóveis de leilão</h1>
+    <p class="header-description">Consulte a lista, filtre por localização e preço e confira as informações no anúncio oficial.</p>
+  </div>
+  <div class="header-meta"><span style="font-size:12px;font-weight:500;opacity:.9">Atualizado em 22/11/2026</span><div id="contador">0 imóveis</div></div>
+</header>
+<div id="status-carregamento" role="status" aria-live="polite">Carregando imóveis…</div>
+
+<div class="layout">
+
+  <div class="mobile-filters">
+    <button id="mobile-filter-toggle" class="mobile-filter-toggle" type="button"
+            aria-expanded="false" aria-controls="filters-panel">
+      <span id="mobile-filter-toggle-label">Filtros</span>
+      <span id="mobile-filter-status">Carregando imóveis…</span>
+    </button>
+
+    <aside class="sidebar" id="filters-panel">
+      <div id="filtros"></div>
+    </aside>
+  </div>
+
+  <div class="mobile-sort">
+    <label for="mobile-sort-select">Ordenar:</label>
+    <select id="mobile-sort-select" aria-label="Ordenar imóveis">
+      <option value="padrao">Ordem original</option>
+      <option value="preco-menor">Menor preço</option>
+      <option value="preco-maior">Maior preço</option>
+      <option value="desconto-maior">Maior desconto</option>
+      <option value="avaliacao-menor">Menor avaliação</option>
+      <option value="avaliacao-maior">Maior avaliação</option>
+      <option value="endereco-az">Endereço A–Z</option>
+    </select>
+  </div>
+
+  <main class="conteudo">
+
+    <div class="tabela-container">
+      <table id="tabela">
+        <colgroup>
+          <col class="col-endereco">
+          <col class="col-avaliacao">
+          <col class="col-preco">
+          <col class="col-desconto">
+          <col class="col-link">
+        </colgroup>
+        <thead>
+          <tr>
+            <th data-sort="Endereço mapa" style="cursor:pointer">Endereço Mapa ↕</th>
+            <th data-sort="Valor Avaliação Num" style="cursor:pointer">Valor de avaliação ↕</th>
+            <th data-sort="Preço Num" style="cursor:pointer">Preço ↕</th>
+            <th data-sort="Desconto Num" style="cursor:pointer">Desconto ↕</th>
+            <th>Link site Caixa</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div id="paginador">
+      <button id="anterior">Anterior</button>
+      <span id="pagina-info"></span>
+      <button id="proximo">Próximo</button>
+    </div>
+
+  </main>
+  <aside class="ad-rail" aria-label="Espaço para publicidade"><div class="ad-slot" aria-label="Espaço reservado para anúncios"></div></aside>
+
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', async function () {
+  const status = document.getElementById('status-carregamento');
+  try {
+    const resposta = await fetch('./imoveis.json', { cache: 'no-store' });
+    if (!resposta.ok) throw new Error('HTTP ' + resposta.status);
+    const imoveisOriginais = await resposta.json();
+    status.style.display = 'none';
+  let filtrosSelecionados = {};
+  let paginaAtual = 1;
+  const itensPorPagina = 18;
+  let colunaOrdenacao = null;
+  let ordemCrescente = true;
+  const filtrosIntervalo = {
+    preco: { campo: 'Preço Num', titulo: 'Preço', escala: 1, minimo: null, maximo: null },
+    desconto: { campo: 'Desconto Num', titulo: 'Desconto', escala: 100, minimo: null, maximo: null, sufixo: '%' },
+    avaliacao: { campo: 'Valor Avaliação Num', titulo: 'Valor de avaliação', escala: 1, minimo: null, maximo: null }
+  };
+  const formatadorInteiro = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
+  const formatadorPercentual = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
+
+  function numeroFiltro(valor) {
+    const n = Number(valor);
+    return Number.isFinite(n) ? n : null;
+  }
+
+  function lerNumeroPt(valor) {
+    const texto = String(valor ?? '').trim().replace(/\s/g, '').replace(/[^\d,.-]/g, '');
+    if (!texto) return null;
+    const normalizado = texto.includes(',')
+      ? texto.replace(/\./g, '').replace(',', '.')
+      : texto.replace(/\./g, '');
+    const numero = Number(normalizado);
+    return Number.isFinite(numero) ? numero : null;
+  }
+
+  function formatarIntervalo(filtro, valor) {
+    if (valor === null) return '';
+    const formatador = filtro.escala === 100 ? formatadorPercentual : formatadorInteiro;
+    return formatador.format(valor) + (filtro.sufixo || '');
+  }
+
+  const cacheExtremos = {};
+  function extremosFiltro(filtro) {
+    if (cacheExtremos[filtro.campo]) return cacheExtremos[filtro.campo];
+    const numeros = imoveisOriginais
+      .map(i => numeroFiltro(i[filtro.campo]))
+      .filter(n => n !== null)
+      .map(n => n * filtro.escala);
+    cacheExtremos[filtro.campo] = numeros.length
+      ? { minimo: Math.min(...numeros), maximo: Math.max(...numeros) }
+      : { minimo: 0, maximo: 0 };
+    return cacheExtremos[filtro.campo];
+  }
+
+  function intervaloAtivo(filtro, imovel) {
+    if (filtro.minimo === null && filtro.maximo === null) return true;
+    const valorBase = numeroFiltro(imovel[filtro.campo]);
+    if (valorBase === null) return false;
+    const valor = valorBase * filtro.escala;
+    return (filtro.minimo === null || valor >= filtro.minimo) &&
+      (filtro.maximo === null || valor <= filtro.maximo);
+  }
+
+  function atualizarVisualIntervalo(chave) {
+    const filtro = filtrosIntervalo[chave];
+    const grupo = document.getElementById('intervalo-grupo-' + chave);
+    if (!grupo) return;
+    const extremos = extremosFiltro(filtro);
+    const maxSlider = extremos.maximo > extremos.minimo ? extremos.maximo : extremos.minimo + 1;
+    const valorMinimo = filtro.minimo === null ? extremos.minimo : filtro.minimo;
+    const valorMaximo = filtro.maximo === null ? maxSlider : filtro.maximo;
+    const campoMinimo = document.getElementById('intervalo-' + chave + '-minimo');
+    const campoMaximo = document.getElementById('intervalo-' + chave + '-maximo');
+    if (campoMinimo) campoMinimo.value = formatarIntervalo(filtro, filtro.minimo);
+    if (campoMaximo) campoMaximo.value = formatarIntervalo(filtro, filtro.maximo);
+
+    const sliderMinimo = document.getElementById('slider-' + chave + '-minimo');
+    const sliderMaximo = document.getElementById('slider-' + chave + '-maximo');
+    if (sliderMinimo) sliderMinimo.value = String(valorMinimo);
+    if (sliderMaximo) sliderMaximo.value = String(valorMaximo);
+    const amplitude = maxSlider - extremos.minimo || 1;
+    const inicio = Math.max(0, Math.min(100, ((valorMinimo - extremos.minimo) / amplitude) * 100));
+    const fim = Math.max(inicio, Math.min(100, ((valorMaximo - extremos.minimo) / amplitude) * 100));
+    grupo.style.setProperty('--inicio', inicio + '%');
+    grupo.style.setProperty('--fim', fim + '%');
+  }
+
+  function desenharFiltrosIntervalo(container) {
+    Object.entries(filtrosIntervalo).forEach(([chave, filtro]) => {
+      const extremos = extremosFiltro(filtro);
+      const maxSlider = extremos.maximo > extremos.minimo ? extremos.maximo : extremos.minimo + 1;
+      const div = document.createElement('div');
+      div.className = 'filtro filtro-intervalo';
+      div.id = 'intervalo-grupo-' + chave;
+
+      const titulo = document.createElement('label');
+      titulo.textContent = filtro.titulo;
+      div.appendChild(titulo);
+
+      const campos = document.createElement('div');
+      campos.className = 'intervalo-campos';
+      ['minimo', 'maximo'].forEach(lado => {
+        const rotulo = document.createElement('label');
+        rotulo.className = 'intervalo-campo';
+        rotulo.appendChild(document.createTextNode(lado === 'minimo' ? 'Mín.' : 'Máx.'));
+        const entrada = document.createElement('input');
+        entrada.type = 'text';
+        entrada.inputMode = 'decimal';
+        entrada.placeholder = formatarIntervalo(filtro, lado === 'minimo' ? extremos.minimo : extremos.maximo);
+        entrada.value = formatarIntervalo(filtro, filtro[lado]);
+        entrada.id = 'intervalo-' + chave + '-' + lado;
+        entrada.setAttribute('aria-label', filtro.titulo + ' ' + (lado === 'minimo' ? 'mínimo' : 'máximo'));
+        entrada.addEventListener('change', () => alterarIntervalo(chave, lado, entrada.value, false));
+        rotulo.appendChild(entrada);
+        campos.appendChild(rotulo);
+      });
+      div.appendChild(campos);
+
+      const controles = document.createElement('div');
+      controles.className = 'intervalo-sliders';
+      const trilho = document.createElement('div');
+      trilho.className = 'intervalo-trilho';
+      controles.appendChild(trilho);
+      ['minimo', 'maximo'].forEach((lado, indice) => {
+        const slider = document.createElement('input');
+        slider.type = 'range';
+        slider.min = String(extremos.minimo);
+        slider.max = String(maxSlider);
+        slider.step = '1';
+        slider.value = String(lado === 'minimo' ? extremos.minimo : maxSlider);
+        slider.className = 'intervalo-slider intervalo-slider-' + lado;
+        slider.id = 'slider-' + chave + '-' + lado;
+        slider.setAttribute('aria-label', filtro.titulo + ' ' + (lado === 'minimo' ? 'mínimo' : 'máximo'));
+        slider.style.zIndex = String(indice + 1);
+        slider.addEventListener('pointerdown', () => { slider.style.zIndex = '3'; });
+        slider.addEventListener('input', () => alterarIntervalo(chave, lado, slider.value, true));
+        controles.appendChild(slider);
+      });
+      div.appendChild(controles);
+      container.appendChild(div);
+      atualizarVisualIntervalo(chave);
+    });
+  }
+
+  function alterarIntervalo(chave, lado, bruto, slider = false) {
+    const filtro = filtrosIntervalo[chave];
+    const extremos = extremosFiltro(filtro);
+    let valor = bruto === '' ? null : (slider ? numeroFiltro(bruto) : lerNumeroPt(bruto));
+    if (valor !== null) {
+      valor = Math.max(extremos.minimo, Math.min(extremos.maximo, valor));
+      if (lado === 'minimo' && valor <= extremos.minimo) valor = null;
+      if (lado === 'maximo' && valor >= extremos.maximo) valor = null;
+    }
+    filtro[lado] = valor;
+    if (filtro.minimo !== null && filtro.maximo !== null && filtro.minimo > filtro.maximo) {
+      filtro[lado === 'minimo' ? 'maximo' : 'minimo'] = valor;
+    }
+    atualizarVisualIntervalo(chave);
+    paginaAtual = 1;
+    atualizarInterface(false);
+  }
+  const ordemFiltros = [
+    'Região','UF','Cidade','Bairro','Tipo Imóvel',
+    'Quartos','Vagas de garagem','Financiamento','Modalidade de venda'
+  ];
+
+  function pegar(obj, ...nomes) {
+    for (const n of nomes) if (obj[n]) return obj[n];
+    return '';
+  }
+
+  function aplicarFiltros(imovel) {
+    if (!Object.values(filtrosIntervalo).every(filtro => intervaloAtivo(filtro, imovel))) return false;
+    for (const campo in filtrosSelecionados) {
+      if (
+        filtrosSelecionados[campo].length > 0 &&
+        !filtrosSelecionados[campo].includes(String(imovel[campo]))
+      ) return false;
+    }
+    return true;
+  }
+
+  function atualizarFiltros() {
+    const container = document.getElementById('filtros');
+    container.innerHTML = '';
+
+    ordemFiltros.forEach(campo => {
+      // Recalcula as opcoes com os outros filtros e ignora o campo atual.
+      // Isso permite acrescentar varios estados ou cidades.
+      const listaParaOpcoes = imoveisOriginais.filter(imovel => {
+        return Object.entries(filtrosSelecionados).every(([filtro, selecionados]) => {
+          if (filtro === campo || !selecionados || selecionados.length === 0) return true;
+          return selecionados.includes(String(imovel[filtro] ?? ''));
+        });
+      });
+
+      const valoresSet = new Set(
+        listaParaOpcoes.map(i => String(i[campo] ?? '')).filter(v => v)
+      );
+      (filtrosSelecionados[campo] || []).forEach(valor => valoresSet.add(valor));
+      const valores = [...valoresSet].sort();
+
+      const div = document.createElement('div');
+      div.className = 'filtro';
+
+      const titulo = document.createElement('div');
+      titulo.className = 'filtro-titulo';
+
+      const label = document.createElement('label');
+      label.textContent = campo;
+
+      const limpar = document.createElement('button');
+      limpar.type = 'button';
+      limpar.className = 'limpar-filtro';
+      limpar.textContent = 'Limpar';
+      limpar.title = 'Limpar somente este filtro';
+      limpar.disabled = !filtrosSelecionados[campo] || filtrosSelecionados[campo].length === 0;
+      limpar.onclick = () => {
+        filtrosSelecionados[campo] = [];
+        paginaAtual = 1;
+        atualizarInterface();
+      };
+
+      titulo.appendChild(label);
+      titulo.appendChild(limpar);
+      div.appendChild(titulo);
+
+      if (campo === 'UF' || campo === 'Cidade' || campo === 'Bairro') {
+        const busca = document.createElement('input');
+        busca.type = 'text';
+        busca.placeholder = 'Buscar...';
+        busca.className = 'busca';
+        busca.oninput = () => {
+          atualizarCheckboxes(
+            campo,
+            valores.filter(v => v.includes(busca.value.toUpperCase())),
+            box
+          );
+        };
+        div.appendChild(busca);
+      }
+
+      const box = document.createElement('div');
+      box.className = 'checkboxes';
+
+      atualizarCheckboxes(campo, valores, box);
+
+      div.appendChild(box);
+      container.appendChild(div);
+      if (campo === 'Tipo Imóvel') desenharFiltrosIntervalo(container);
+    });
+  }
+
+  function atualizarCheckboxes(campo, valores, box) {
+    box.innerHTML = '';
+
+    valores.forEach(valor => {
+      const chk = document.createElement('input');
+      chk.type = 'checkbox';
+      chk.value = valor;
+      chk.name = campo;
+
+      if (!filtrosSelecionados[campo]) filtrosSelecionados[campo] = [];
+      chk.checked = filtrosSelecionados[campo].includes(valor);
+
+      chk.onchange = () => {
+        const selecionados = new Set(filtrosSelecionados[campo] || []);
+        if (chk.checked) {
+          selecionados.add(chk.value);
+        } else {
+          selecionados.delete(chk.value);
+        }
+        filtrosSelecionados[campo] = Array.from(selecionados);
+        paginaAtual = 1;
+        atualizarInterface();
+      };
+
+      const lbl = document.createElement('label');
+      lbl.appendChild(chk);
+      lbl.appendChild(document.createTextNode(' ' + valor));
+      box.appendChild(lbl);
+    });
+  }
+
+  function atualizarTabela(lista) {
+    const corpo = document.querySelector('#tabela tbody');
+    corpo.innerHTML = '';
+
+    const total = lista.length;
+    const inicio = (paginaAtual - 1) * itensPorPagina;
+    const pagina = lista.slice(inicio, inicio + itensPorPagina);
+
+    pagina.forEach(imovel => {
+      const tr = document.createElement('tr');
+
+      const endereco = imovel["Endereço mapa"];
+
+      const tdEnd = document.createElement('td');
+      const enderecoWrap = document.createElement('div');
+      enderecoWrap.className = 'imovel-endereco';
+      const numeroImovel = String(imovel['N° do imóvel'] || '').replace(/\\D/g, '');
+      if (numeroImovel) {
+        const fotoLink = document.createElement('a');
+        fotoLink.className = 'foto-imovel-link';
+        fotoLink.href = imovel['Link'] || '#';
+        fotoLink.target = '_blank';
+        fotoLink.rel = 'noopener';
+        fotoLink.setAttribute('aria-label', 'Abrir imóvel na Caixa');
+        const foto = document.createElement('img');
+        foto.className = 'foto-imovel';
+        foto.src = 'https://venda-imoveis.caixa.gov.br/fotos/F' + numeroImovel.padStart(13, '0') + '21.jpg';
+        foto.alt = 'Foto do imóvel';
+        foto.loading = 'lazy';
+        foto.decoding = 'async';
+        foto.referrerPolicy = 'no-referrer';
+        foto.onerror = () => fotoLink.remove();
+        fotoLink.appendChild(foto);
+        enderecoWrap.appendChild(fotoLink);
+      }
+      const aMapa = document.createElement('a');
+      aMapa.className = 'endereco-mapa';
+      aMapa.href = 'https://maps.google.com/maps?q=' + encodeURIComponent(endereco);
+      const enderecoPrincipal = String(imovel['Endereço'] || '').trim() || String(endereco || '').trim();
+      const cidadeUf = [String(imovel['Cidade'] || '').trim(), String(imovel['UF'] || '').trim()].filter(Boolean).join(' - ');
+      const linhaEndereco = document.createElement('span');
+      linhaEndereco.textContent = enderecoPrincipal;
+      aMapa.appendChild(linhaEndereco);
+      if (cidadeUf) {
+        const linhaLocalidade = document.createElement('span');
+        linhaLocalidade.className = 'endereco-localidade';
+        linhaLocalidade.textContent = cidadeUf;
+        aMapa.appendChild(linhaLocalidade);
+      }
+      aMapa.target = '_blank';
+      aMapa.rel = 'noopener';
+      enderecoWrap.appendChild(aMapa);
+      tdEnd.appendChild(enderecoWrap);
+      tr.appendChild(tdEnd);
+
+      ['Valor de avaliação','Preço','Desconto ok'].forEach(c => {
+        const td = document.createElement('td');
+        td.textContent = imovel[c] || '';
+        tr.appendChild(td);
+      });
+
+      const tdLink = document.createElement('td');
+      const a = document.createElement('a');
+      a.href = imovel['Link'] || '#';
+      a.textContent = 'Ver';
+      a.target = '_blank';
+      tdLink.appendChild(a);
+      tr.appendChild(tdLink);
+
+      corpo.appendChild(tr);
+    });
+
+    const totalPaginas = Math.ceil(total / itensPorPagina);
+
+    document.getElementById('contador').textContent =
+      total + ' imóveis';
+
+    const opcoesSelecionadas = Object.values(filtrosSelecionados)
+      .reduce((soma, valores) => soma + (valores ? valores.length : 0), 0) +
+      Object.values(filtrosIntervalo).filter(filtro => filtro.minimo !== null || filtro.maximo !== null).length;
+    document.getElementById('mobile-filter-status').textContent =
+      opcoesSelecionadas
+        ? opcoesSelecionadas + ' opções · ' + total.toLocaleString('pt-BR') + ' imóveis'
+        : total.toLocaleString('pt-BR') + ' imóveis';
+
+    document.getElementById('pagina-info').textContent =
+      'Página ' + paginaAtual + ' de ' + totalPaginas;
+
+    document.getElementById('anterior').disabled = paginaAtual === 1;
+    document.getElementById('proximo').disabled = paginaAtual === totalPaginas;
+  }
+
+  function atualizarInterface(reconstruirFiltros = true) {
+    let filtrados = imoveisOriginais.filter(aplicarFiltros);
+
+    if (colunaOrdenacao) {
+      filtrados.sort((a,b)=>{
+        let va=a[colunaOrdenacao];
+        let vb=b[colunaOrdenacao];
+
+        if(["Valor Avaliação Num","Preço Num","Desconto Num"].includes(colunaOrdenacao)){
+          va=Number(va)||0;
+          vb=Number(vb)||0;
+        }else{
+          va=String(va||"").toUpperCase();
+          vb=String(vb||"").toUpperCase();
+        }
+
+		if (ordemCrescente) {
+			if (va < vb) return -1;
+			if (va > vb) return 1;
+		} else {
+			if (va < vb) return 1;
+			if (va > vb) return -1;
+		}
+
+		return 0;
+        return 0;
+      });
+    }
+
+    if (reconstruirFiltros) atualizarFiltros();
+    atualizarTabela(filtrados);
+  }
+
+
+  const mobileSortSelect = document.getElementById('mobile-sort-select');
+
+  mobileSortSelect.addEventListener('change', () => {
+    const ordenacoes = {
+      'padrao': { coluna: null, crescente: true },
+      'preco-menor': { coluna: 'Preço Num', crescente: true },
+      'preco-maior': { coluna: 'Preço Num', crescente: false },
+      'desconto-maior': { coluna: 'Desconto Num', crescente: false },
+      'avaliacao-menor': { coluna: 'Valor Avaliação Num', crescente: true },
+      'avaliacao-maior': { coluna: 'Valor Avaliação Num', crescente: false },
+      'endereco-az': { coluna: 'Endereço mapa', crescente: true }
+    };
+
+    const escolha = ordenacoes[mobileSortSelect.value];
+    colunaOrdenacao = escolha.coluna;
+    ordemCrescente = escolha.crescente;
+    paginaAtual = 1;
+    atualizarInterface();
+  });
+
+  const mobileFilterToggle = document.getElementById('mobile-filter-toggle');
+  const filtersPanel = document.getElementById('filters-panel');
+
+  mobileFilterToggle.addEventListener('click', () => {
+    const aberto = filtersPanel.classList.toggle('is-open');
+    mobileFilterToggle.setAttribute('aria-expanded', String(aberto));
+    document.getElementById('mobile-filter-toggle-label').textContent =
+      aberto ? 'Fechar filtros' : 'Filtros';
+  });
+
+document.getElementById('anterior').onclick = () => {
+    if (paginaAtual > 1) {
+        paginaAtual--;
+        atualizarInterface();
+    }
+};
+
+document.getElementById('proximo').onclick = () => {
+    const filtrados = imoveisOriginais.filter(aplicarFiltros);
+
+    if (paginaAtual * itensPorPagina < filtrados.length) {
+        paginaAtual++;
+        atualizarInterface();
+    }
+};
+
+document.querySelectorAll("#tabela thead th[data-sort]").forEach(th => {
+
+    th.addEventListener("click", () => {
+
+        const c = th.dataset.sort;
+
+        if (colunaOrdenacao === c) {
+            ordemCrescente = !ordemCrescente;
+        } else {
+            colunaOrdenacao = c;
+            ordemCrescente = false; // primeiro clique = decrescente
+        }
+
+        paginaAtual = 1;
+        atualizarInterface();
+
+    });
+
+});
+
+atualizarInterface();
+  } catch (erro) {
+    status.textContent = 'Não foi possível carregar os imóveis. Tente atualizar a página.';
+    console.error('Falha ao carregar imoveis.json:', erro);
+  }
+});
+</script>
+
+  <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"515a040b6ed645b8be06be6229348d35"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
